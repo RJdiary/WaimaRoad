@@ -1,19 +1,64 @@
-// app.js
 App({
   onLaunch: function () {
     this.globalData = {
-      // env 参数说明：
-      // env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会请求到哪个云环境的资源
-      // 此处请填入环境 ID, 环境 ID 可在微信开发者工具右上顶部工具栏点击云开发按钮打开获取
-      env: "",
+      env: "cloud1-d2g877qzy64802271",
+      userInfo: null,
+      fontSize: 30,
+      favorites: [],
+      checkins: []
     };
+
     if (!wx.cloud) {
       console.error("请使用 2.2.3 或以上的基础库以使用云能力");
     } else {
       wx.cloud.init({
         env: this.globalData.env,
-        traceUser: true,
+        traceUser: true
       });
     }
+
+    try {
+      var userInfo = wx.getStorageSync("userInfo");
+      if (userInfo) {
+        this.globalData.userInfo = userInfo;
+      }
+    } catch (e) {
+      console.error("读取用户信息失败", e);
+    }
+
+    try {
+      var fontSize = wx.getStorageSync("fontSize");
+      if (fontSize) {
+        this.globalData.fontSize = fontSize;
+      }
+    } catch (e) {
+      console.error("读取字体设置失败", e);
+    }
   },
+
+  getUserInfo: function () {
+    return this.globalData.userInfo;
+  },
+
+  setUserInfo: function (userInfo) {
+    this.globalData.userInfo = userInfo;
+    try {
+      wx.setStorageSync("userInfo", userInfo);
+    } catch (e) {
+      console.error("保存用户信息失败", e);
+    }
+  },
+
+  getFontSize: function () {
+    return this.globalData.fontSize;
+  },
+
+  setFontSize: function (fontSize) {
+    this.globalData.fontSize = fontSize;
+    try {
+      wx.setStorageSync("fontSize", fontSize);
+    } catch (e) {
+      console.error("保存字体设置失败", e);
+    }
+  }
 });

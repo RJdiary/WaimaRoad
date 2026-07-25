@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="safe-area"></view>
+
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="onBack">
+      <text class="back-icon">‹</text>
+    </view>
+  </view>
+
+  <view class="header">
+    <view class="title serif">AI修复影像对比</view>
+    <view class="subtitle">← 左右滑动对比修复前后效果 →</view>
+  </view>
+
+  <view class="compare-container">
+    <view
+      class="compare-slider"
+      bindtouchstart="onSliderTouchStart"
+      bindtouchmove="onSliderTouchMove"
+      bindtouchend="onSliderTouchEnd"
+    >
+      <view class="compare-img before">🏚</view>
+      <view class="compare-img after" style="width: {{sliderLeft}}%">🏛</view>
+      <view class="compare-divider" style="left: {{sliderLeft}}%"></view>
+      <view class="compare-handle" style="left: {{sliderLeft}}%">
+        <text class="handle-icon">⇔</text>
+      </view>
+    </view>
+
+    <view class="compare-labels">
+      <text class="label-item">📷 原始影像 · 1932年</text>
+      <text class="label-item">✨ AI修复 · 2026年</text>
+    </view>
+  </view>
+
+  <view class="content-section">
+    <view class="section-title serif">
+      <view class="title-bar"></view>
+      影像背景
+    </view>
+    <view class="section-text">
+      这张照片拍摄于1932年，记录了当时济南最繁华的商业街——泉城路的日常景象。照片中可以看到沿街林立的各式商铺、穿梭的黄包车、身着民国服饰的行人，生动再现了那个年代的市井风情。
+    </view>
+    <view class="section-text">
+      通过AI超分辨率修复技术，我们成功还原了照片中模糊的细节，包括店铺招牌上的文字、行人的面部表情、建筑的精美装饰等，让这段珍贵的历史记忆得以清晰重现。
+    </view>
+  </view>
+</view>

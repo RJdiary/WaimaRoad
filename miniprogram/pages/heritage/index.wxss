@@ -1,0 +1,160 @@
+.page {
+  min-height: 100vh;
+  background: var(--paper-bg);
+  overflow-x: hidden;
+}
+
+.heritage-header {
+  padding: 32rpx 40rpx 24rpx;
+  background: linear-gradient(180deg, var(--warm-cream) 0%, transparent 100%);
+}
+
+.heritage-header .title {
+  font-size: 52rpx;
+  font-weight: 700;
+  color: var(--primary-brown-dark);
+  letter-spacing: 4rpx;
+}
+
+.heritage-header .subtitle {
+  font-size: 24rpx;
+  color: var(--text-light);
+  margin-top: 8rpx;
+}
+
+.category-tabs {
+  white-space: nowrap;
+  padding: 24rpx 32rpx;
+}
+
+.category-tab {
+  display: inline-block;
+  padding: 16rpx 36rpx;
+  border-radius: 40rpx;
+  font-size: 26rpx;
+  color: var(--text-medium);
+  background: rgba(139, 90, 43, 0.06);
+  margin-right: 16rpx;
+}
+
+.category-tab.active {
+  background: var(--primary-brown);
+  color: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(139, 90, 43, 0.3);
+}
+
+.heritage-list {
+  padding: 16rpx 32rpx 180rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+}
+
+.heritage-card {
+  background: #fff;
+  border-radius: 32rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 43, 0.12);
+}
+
+.heritage-card-img {
+  height: 280rpx;
+  background: linear-gradient(135deg, #C4A882, #8B6508);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 96rpx;
+}
+
+.heritage-card-img.ai-restored {
+  background: linear-gradient(135deg, #2D2418, #5C4A3A);
+}
+
+.heritage-badge {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  color: #fff;
+}
+
+.heritage-badge.building {
+  background: var(--accent-gold);
+}
+
+.heritage-badge.red {
+  background: var(--accent-red);
+}
+
+.heritage-badge.religion {
+  background: var(--accent-green);
+}
+
+.heritage-badge.ai {
+  background: linear-gradient(135deg, #5C4A7A, #7A5C99);
+}
+
+.heritage-card-body {
+  padding: 28rpx 32rpx;
+}
+
+.heritage-card-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 12rpx;
+}
+
+.heritage-card-desc {
+  font-size: 24rpx;
+  color: var(--text-light);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.heritage-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx dashed rgba(139, 90, 43, 0.15);
+}
+
+.meta-left {
+  font-size: 22rpx;
+  color: var(--text-light);
+  display: flex;
+  gap: 24rpx;
+}
+
+.meta-right {
+  font-size: 32rpx;
+  color: var(--text-light);
+}
+
+.empty-state {
+  padding: 120rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-emoji {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-light);
+}

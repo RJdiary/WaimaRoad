@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "史料",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "ai-chat": "../../components/aiChat/index"
+  }
+}

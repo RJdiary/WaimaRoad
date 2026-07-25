@@ -1,0 +1,72 @@
+<view class="ai-chat-wrapper">
+  <view
+    class="ai-fab-btn"
+    style="left:{{btnLeft}}px;top:{{btnTop}}px"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+  >
+    <text class="fab-icon">💬</text>
+  </view>
+
+  <view class="ai-chat-overlay" wx:if="{{showPanel}}" bindtap="closePanel">
+    <view class="ai-chat-panel" catchtap="preventDefault">
+      <view class="ai-chat-header">
+        <view class="ai-chat-title">
+          <view class="ai-chat-avatar">🤖</view>
+          <view class="ai-chat-title-text">
+            <view class="ai-chat-name serif">AI文化助手</view>
+            <view class="ai-chat-status">● 在线</view>
+          </view>
+        </view>
+        <view class="ai-chat-close" bindtap="closePanel">✕</view>
+      </view>
+
+      <scroll-view scroll-x="true" class="ai-quick-questions" enhanced show-scrollbar="{{false}}">
+        <view
+          class="quick-q"
+          wx:for="{{quickQuestions}}"
+          wx:key="*this"
+          bindtap="sendQuickQuestion"
+          data-question="{{item}}"
+        >{{item}}</view>
+      </scroll-view>
+
+      <scroll-view scroll-y="true" class="ai-messages" scroll-into-view="{{scrollToId}}" enhanced show-scrollbar="{{false}}">
+        <view
+          class="msg {{item.role}}"
+          wx:for="{{messages}}"
+          wx:key="id"
+          id="msg-{{item.id}}"
+        >
+          <view class="msg-avatar {{item.role}}">
+            <text wx:if="{{item.role === 'ai'}}">🤖</text>
+            <text wx:else>👤</text>
+          </view>
+          <view class="msg-content">
+            <view class="msg-bubble {{item.role}}">{{item.content}}</view>
+            <view class="msg-feedback" wx:if="{{item.role === 'ai'}}">
+              <view class="feedback-btn" bindtap="onFeedback" data-type="helpful" data-id="{{item.id}}">👍 有帮助</view>
+              <view class="feedback-btn" bindtap="onFeedback" data-type="not-helpful" data-id="{{item.id}}">👎 没帮助</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+
+      <view class="ai-input-area">
+        <textarea
+          class="ai-input"
+          placeholder="输入你想了解的问题..."
+          placeholder-class="ai-input-placeholder"
+          value="{{inputText}}"
+          bindinput="onInputChange"
+          auto-height
+          maxlength="200"
+          confirm-type="send"
+          bindconfirm="onConfirmSend"
+        ></textarea>
+        <view class="ai-send-btn {{inputText ? 'active' : ''}}" bindtap="onTapSend">➤</view>
+      </view>
+    </view>
+  </view>
+</view>

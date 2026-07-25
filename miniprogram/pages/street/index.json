@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "走街",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "ai-chat": "../../components/aiChat/index"
+  }
+}

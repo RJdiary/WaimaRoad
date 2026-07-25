@@ -1,27 +1,89 @@
-/**app.wxss**/
+page {
+  --primary-brown: #8B5A2B;
+  --primary-brown-light: #A67C52;
+  --primary-brown-dark: #6B4226;
+  --warm-cream: #F5E6D3;
+  --warm-cream-dark: #E8D4BC;
+  --paper-bg: #FAF3E7;
+  --text-dark: #2D2418;
+  --text-medium: #5C4A3A;
+  --text-light: #8B7968;
+  --accent-red: #8B2635;
+  --accent-gold: #B8860B;
+  --accent-green: #4A6741;
+
+  background: var(--paper-bg);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.serif {
+  font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-} 
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 43, 0.12);
+}
 
 button {
   background: initial;
 }
 
-button:focus{
+button:focus {
   outline: 0;
 }
 
-button::after{
+button::after {
   border: none;
 }
 
+.btn-primary {
+  background: var(--primary-brown);
+  color: #fff;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  padding: 20rpx 40rpx;
+  border: none;
+}
 
-page {
-  background: #f6f6f6;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+.btn-primary:active {
+  background: var(--primary-brown-dark);
+}
+
+.btn-secondary {
+  background: var(--warm-cream);
+  color: var(--primary-brown);
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  padding: 20rpx 40rpx;
+  border: none;
+}
+
+.btn-secondary:active {
+  background: var(--warm-cream-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary-brown);
+  border: 2rpx solid var(--primary-brown);
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  padding: 20rpx 40rpx;
+}
+
+.btn-outline:active {
+  background: var(--warm-cream);
 }
