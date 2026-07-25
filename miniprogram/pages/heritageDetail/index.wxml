@@ -22,7 +22,7 @@
         <text>{{heritage.categoryEmoji || '🏛'}} {{heritage.categoryName || '建筑'}}</text>
       </view>
       <view class="detail-tag">
-        <text>📍 {{heritage.location || '天桥区'}}</text>
+        <text>📍 {{heritage.location || '汕头外马路'}}</text>
       </view>
       <view class="detail-tag">
         <text>📅 {{heritage.era || '1904年'}}</text>

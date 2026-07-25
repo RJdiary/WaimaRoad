@@ -74,6 +74,8 @@
   margin-bottom: 28rpx;
 }
 
+.route-desc { font-size: 24rpx; color: var(--text-light); margin-top: 16rpx; line-height: 1.5; }
+
 .route-info-item {
   display: flex;
   align-items: center;

@@ -30,7 +30,7 @@ function getHeritages(category) {
           list.sort(function (a, b) {
             return (b.views || 0) - (a.views || 0);
           });
-          resolve(list);
+          resolve(list.length ? list : filterMockHeritages(category));
         })
         .catch(function (e) {
           console.log('[db] getHeritages 查询失败，降级使用mock:', e);
@@ -56,9 +56,9 @@ function getHeritageById(id) {
   return new Promise(function (resolve) {
     var db = init();
     if (db) {
-      db.collection('heritages').doc(id).get()
+      db.collection('heritages').where({ id: Number(id) }).get()
         .then(function (res) {
-          resolve(res.data || null);
+          resolve(res.data && res.data.length ? res.data[0] : findMockHeritageById(id));
         })
         .catch(function (e) {
           console.log('[db] getHeritageById 查询失败，降级使用mock:', e);
@@ -73,7 +73,7 @@ function getHeritageById(id) {
 function findMockHeritageById(id) {
   var list = mockData.heritages || [];
   for (var i = 0; i < list.length; i++) {
-    if (list[i]._id === id) {
+    if (String(list[i].id) === String(id) || list[i]._id === id) {
       return list[i];
     }
   }
@@ -86,7 +86,7 @@ function getRoutes() {
     if (db) {
       db.collection('routes').get()
         .then(function (res) {
-          resolve(res.data || []);
+          resolve(res.data && res.data.length ? res.data : (mockData.routes || []));
         })
         .catch(function (e) {
           console.log('[db] getRoutes 查询失败，降级使用mock:', e);
@@ -108,7 +108,7 @@ function getPointsByRouteId(routeId) {
           list.sort(function (a, b) {
             return (a.sortOrder || 0) - (b.sortOrder || 0);
           });
-          resolve(list);
+          resolve(list.length ? list : filterMockPointsByRouteId(routeId));
         })
         .catch(function (e) {
           console.log('[db] getPointsByRouteId 查询失败，降级使用mock:', e);

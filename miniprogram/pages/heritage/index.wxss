@@ -82,9 +82,12 @@
   color: #fff;
 }
 
-.heritage-badge.building {
+.heritage-badge.diplomacy {
   background: var(--accent-gold);
 }
+
+.heritage-badge.commerce { background: #B77A3A; }
+.heritage-badge.culture { background: #6B5C8A; }
 
 .heritage-badge.red {
   background: var(--accent-red);

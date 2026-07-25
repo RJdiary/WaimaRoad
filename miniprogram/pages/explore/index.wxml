@@ -1,7 +1,7 @@
 <view class="page">
   <view class="explore-header">
     <view>
-      <view class="explore-title serif">探索</view>
+      <view class="explore-title serif">外马路</view>
       <view class="explore-subtitle">{{currentTime}}</view>
     </view>
     <view class="header-actions">
@@ -21,39 +21,39 @@
       <view class="map-area" style="top:65%;left:15%;width:28%;height:20%;background:rgba(74,103,65,0.25)"></view>
     </view>
 
-    <view class="map-icon building" style="top:18%;left:22%" bindtap="goToHeritage" data-category="building">🏛</view>
+    <view class="map-icon building" style="top:18%;left:22%" bindtap="goToHeritage" data-category="diplomacy">⚓</view>
     <view class="map-icon red" style="top:42%;left:55%" bindtap="goToHeritage" data-category="red">⭐</view>
-    <view class="map-icon religion" style="top:72%;left:28%" bindtap="goToHeritage" data-category="religion">⛩</view>
-    <view class="map-icon building" style="top:25%;left:75%" bindtap="goToHeritage" data-category="building">🏯</view>
+    <view class="map-icon religion" style="top:72%;left:28%" bindtap="goToHeritage" data-category="culture">🎭</view>
+    <view class="map-icon building" style="top:25%;left:75%" bindtap="goToHeritage" data-category="commerce">✉️</view>
     <view class="map-icon route" style="top:50%;left:20%" bindtap="goToStreet">🧭</view>
 
     <view class="map-legend">
-      <view class="legend-item"><span class="legend-dot" style="background:var(--accent-gold)"></span>建筑</view>
-      <view class="legend-item"><span class="legend-dot" style="background:var(--accent-red)"></span>红色</view>
-      <view class="legend-item"><span class="legend-dot" style="background:var(--accent-green)"></span>宗教</view>
+      <view class="legend-item"><text class="legend-dot" style="background:var(--accent-gold)"></text>开埠</view>
+      <view class="legend-item"><text class="legend-dot" style="background:var(--accent-red)"></text>红色</view>
+      <view class="legend-item"><text class="legend-dot" style="background:var(--accent-green)"></text>文教</view>
     </view>
   </view>
 
   <view class="quick-cards">
-    <view class="quick-card" bindtap="goToHeritage" data-category="building">
-      <view class="emoji">🏛</view>
-      <view class="title serif">建筑遗存</view>
-      <view class="desc">探寻百年历史建筑之美</view>
+    <view class="quick-card" bindtap="goToHeritage" data-category="diplomacy">
+      <view class="emoji">⚓</view>
+      <view class="title serif">开埠外交</view>
+      <view class="desc">从海关与洋行读懂开埠</view>
     </view>
     <view class="quick-card" bindtap="goToHeritage" data-category="red">
       <view class="emoji">⭐</view>
-      <view class="title serif">红色记忆</view>
-      <view class="desc">传承革命精神与红色文化</view>
+      <view class="title serif">红色革命</view>
+      <view class="desc">追寻东征与抗战记忆</view>
     </view>
     <view class="quick-card" bindtap="goToAiCompare">
       <view class="emoji">🖼</view>
-      <view class="title serif">AI修复影像</view>
-      <view class="desc">让历史影像重焕新生</view>
+      <view class="title serif">AI辅助复原</view>
+      <view class="desc">看见已消失的历史点位</view>
     </view>
     <view class="quick-card" bindtap="goToStreet">
       <view class="emoji">🧭</view>
-      <view class="title serif">主题走街</view>
-      <view class="desc">规划专属文化探索路线</view>
+      <view class="title serif">Citywalk</view>
+      <view class="desc">四条路线，边走边读老城</view>
     </view>
   </view>
 
