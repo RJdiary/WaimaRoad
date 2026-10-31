@@ -13,7 +13,7 @@
 }
 
 .status-bar-placeholder {
-  height: 88rpx;
+  height: var(--miniapp-action-clearance);
 }
 
 .nav-content {
@@ -61,7 +61,7 @@
 }
 
 .content {
-  padding-top: 140rpx;
+  padding-top: calc(var(--miniapp-action-clearance) + 52rpx);
   padding-bottom: 40rpx;
 }
 

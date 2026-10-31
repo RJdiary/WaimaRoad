@@ -1,0 +1,15 @@
+<view class="login-page">
+  <view class="login-shade"></view>
+  <view class="login-content">
+    <view class="login-title">欢迎</view>
+    <view class="login-title">请登录账号</view>
+    <view class="login-form">
+      <view class="field-label">账号</view>
+      <input class="login-input" placeholder="请输入账号" placeholder-class="login-placeholder" value="{{account}}" bindinput="onAccountInput" />
+      <view class="field-label password-label">密码</view>
+      <input class="login-input" password placeholder="请输入密码" placeholder-class="login-placeholder" value="{{password}}" bindinput="onPasswordInput" />
+    </view>
+    <button class="login-button" bindtap="onLogin">登录</button>
+    <view class="login-links"><text bindtap="onBack">忘记密码？</text><text bindtap="onBack">注册</text></view>
+  </view>
+</view>

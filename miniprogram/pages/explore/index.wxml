@@ -1,59 +1,52 @@
 <view class="page">
   <view class="explore-header">
     <view>
-      <view class="explore-title serif">外马路</view>
-      <view class="explore-subtitle">{{currentTime}}</view>
-    </view>
-    <view class="header-actions">
-      <view class="header-btn">🔍</view>
-      <view class="header-btn">📢</view>
+      <view class="explore-title serif">埠藏史库</view>
+      <view class="explore-subtitle">外马路 · 城市历史文化探索</view>
     </view>
   </view>
 
-  <view class="map-container">
-    <view class="map-bg">
-      <view class="map-street h" style="top:30%;left:10%;width:80%"></view>
-      <view class="map-street h" style="top:60%;left:5%;width:90%"></view>
-      <view class="map-street v" style="left:25%;top:10%;height:80%"></view>
-      <view class="map-street v" style="left:65%;top:15%;height:70%"></view>
-      <view class="map-area" style="top:12%;left:8%;width:30%;height:22%;background:rgba(184,134,11,0.3)"></view>
-      <view class="map-area" style="top:35%;left:40%;width:35%;height:20%;background:rgba(139,38,53,0.25)"></view>
-      <view class="map-area" style="top:65%;left:15%;width:28%;height:20%;background:rgba(74,103,65,0.25)"></view>
+  <view class="map-section">
+    <view class="section-heading">
+      <view class="section-title serif">外马路地图</view>
+      <view class="section-note">拖动、缩放并点击点位</view>
     </view>
-
-    <view class="map-icon building" style="top:18%;left:22%" bindtap="goToHeritage" data-category="diplomacy">⚓</view>
-    <view class="map-icon red" style="top:42%;left:55%" bindtap="goToHeritage" data-category="red">⭐</view>
-    <view class="map-icon religion" style="top:72%;left:28%" bindtap="goToHeritage" data-category="culture">🎭</view>
-    <view class="map-icon building" style="top:25%;left:75%" bindtap="goToHeritage" data-category="commerce">✉️</view>
-    <view class="map-icon route" style="top:50%;left:20%" bindtap="goToStreet">🧭</view>
-
-    <view class="map-legend">
-      <view class="legend-item"><text class="legend-dot" style="background:var(--accent-gold)"></text>开埠</view>
-      <view class="legend-item"><text class="legend-dot" style="background:var(--accent-red)"></text>红色</view>
-      <view class="legend-item"><text class="legend-dot" style="background:var(--accent-green)"></text>文教</view>
-    </view>
+    <map
+      id="exploreMap"
+      class="explore-map"
+      latitude="{{mapLatitude}}"
+      longitude="{{mapLongitude}}"
+      scale="{{mapScale}}"
+      markers="{{mapMarkers}}"
+      show-location="true"
+      enable-zoom="true"
+      enable-scroll="true"
+      bindmarkertap="onMapMarkerTap"
+    ></map>
   </view>
 
-  <view class="quick-cards">
-    <view class="quick-card" bindtap="goToHeritage" data-category="diplomacy">
-      <view class="emoji">⚓</view>
-      <view class="title serif">开埠外交</view>
-      <view class="desc">从海关与洋行读懂开埠</view>
+  <view class="quick-section">
+    <view class="section-heading">
+      <view class="section-title serif">按主题探索</view>
+      <view class="section-note">选择你感兴趣的内容</view>
     </view>
-    <view class="quick-card" bindtap="goToHeritage" data-category="red">
-      <view class="emoji">⭐</view>
-      <view class="title serif">红色革命</view>
-      <view class="desc">追寻东征与抗战记忆</view>
-    </view>
-    <view class="quick-card" bindtap="goToAiCompare">
-      <view class="emoji">🖼</view>
-      <view class="title serif">AI辅助复原</view>
-      <view class="desc">看见已消失的历史点位</view>
-    </view>
-    <view class="quick-card" bindtap="goToStreet">
-      <view class="emoji">🧭</view>
-      <view class="title serif">Citywalk</view>
-      <view class="desc">四条路线，边走边读老城</view>
+    <view class="quick-cards">
+      <view class="quick-card diplomacy" bindtap="goToHeritage" data-category="diplomacy">
+        <view class="quick-icon">⚓</view>
+        <view><view class="quick-title">开埠外交</view><view class="quick-desc">海关、领事馆与口岸记忆</view></view>
+      </view>
+      <view class="quick-card red" bindtap="goToHeritage" data-category="red">
+        <view class="quick-icon">★</view>
+        <view><view class="quick-title">红色革命</view><view class="quick-desc">追寻城市的革命足迹</view></view>
+      </view>
+      <view class="quick-card ai" bindtap="goToAiCompare">
+        <view class="quick-icon">✦</view>
+        <view><view class="quick-title">AI辅助复原</view><view class="quick-desc">对照旧影像与复原画面</view></view>
+      </view>
+      <view class="quick-card route" bindtap="goToStreet">
+        <view class="quick-icon">⌖</view>
+        <view><view class="quick-title">主题走街</view><view class="quick-desc">选择路线，边走边读</view></view>
+      </view>
     </view>
   </view>
 

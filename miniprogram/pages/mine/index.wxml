@@ -1,7 +1,9 @@
 <view class="page">
   <view class="my-header">
+    <image class="my-hero-bg" src="../../images/design/profile-hero.jpg" mode="aspectFill"></image>
     <view class="my-user-info">
       <block wx:if="{{!userInfo}}">
+        <navigator class="login-entry" url="/pages/login/index">账号登录</navigator>
         <button class="my-avatar avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
           <text wx:if="{{!tempAvatarUrl}}" class="avatar-emoji">👤</text>
           <image wx:else src="{{tempAvatarUrl}}" class="avatar-img" mode="aspectFill"></image>

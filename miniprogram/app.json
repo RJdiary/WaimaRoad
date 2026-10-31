@@ -13,7 +13,8 @@
     "pages/preferenceSettings/index",
     "pages/privacySettings/index",
     "pages/index/index",
-    "pages/example/index"
+    "pages/example/index",
+    "pages/login/index"
   ],
   "window": {
     "backgroundColor": "#FAF3E7",

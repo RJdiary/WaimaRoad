@@ -5,26 +5,29 @@
 }
 
 .heritage-header {
-  padding: 32rpx 40rpx 24rpx;
-  background: linear-gradient(180deg, var(--warm-cream) 0%, transparent 100%);
+  padding: var(--miniapp-action-clearance) 48rpx 18rpx;
+  position: relative;
+  background: transparent;
 }
 
 .heritage-header .title {
-  font-size: 52rpx;
+  font-size: 56rpx;
   font-weight: 700;
   color: var(--primary-brown-dark);
   letter-spacing: 4rpx;
 }
 
 .heritage-header .subtitle {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: var(--text-light);
   margin-top: 8rpx;
 }
 
+.header-book { position: absolute; right: 72rpx; top: calc(var(--miniapp-action-clearance) - 6rpx); width: 90rpx; height: 90rpx; border: 4rpx solid var(--text-medium); border-radius: 50% 50% 44% 44%; color: var(--primary-brown-dark); font-size: 72rpx; line-height: 70rpx; text-align: center; transform: rotate(-10deg); opacity: .74; }
+
 .category-tabs {
   white-space: nowrap;
-  padding: 24rpx 32rpx;
+  padding: 16rpx 48rpx 24rpx;
 }
 
 .category-tab {
@@ -33,18 +36,18 @@
   border-radius: 40rpx;
   font-size: 26rpx;
   color: var(--text-medium);
-  background: rgba(139, 90, 43, 0.06);
-  margin-right: 16rpx;
+  background: #D9D9D9;
+  margin-right: 14rpx;
 }
 
 .category-tab.active {
-  background: var(--primary-brown);
+  background: #9B9B9B;
   color: #fff;
-  box-shadow: 0 8rpx 24rpx rgba(139, 90, 43, 0.3);
+  box-shadow: none;
 }
 
 .heritage-list {
-  padding: 16rpx 32rpx 180rpx;
+  padding: 0 44rpx 180rpx;
   display: flex;
   flex-direction: column;
   gap: 28rpx;
@@ -52,20 +55,20 @@
 
 .heritage-card {
   background: #fff;
-  border-radius: 32rpx;
+  border-radius: 34rpx;
   overflow: hidden;
-  box-shadow: 0 4rpx 20rpx rgba(139, 90, 43, 0.12);
+  box-shadow: none;
 }
 
 .heritage-card-img {
-  height: 280rpx;
-  background: linear-gradient(135deg, #C4A882, #8B6508);
+  height: 290rpx;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 96rpx;
 }
+
+.heritage-cover { width: 100%; height: 100%; display: block; }
 
 .heritage-card-img.ai-restored {
   background: linear-gradient(135deg, #2D2418, #5C4A3A);
@@ -83,7 +86,7 @@
 }
 
 .heritage-badge.diplomacy {
-  background: var(--accent-gold);
+  background: #F0B367;
 }
 
 .heritage-badge.commerce { background: #B77A3A; }
@@ -102,19 +105,20 @@
 }
 
 .heritage-card-body {
-  padding: 28rpx 32rpx;
+  padding: 24rpx 32rpx 26rpx;
+  background: #D98970;
 }
 
 .heritage-card-title {
   font-size: 34rpx;
   font-weight: 600;
-  color: var(--text-dark);
+  color: #1E1918;
   margin-bottom: 12rpx;
 }
 
 .heritage-card-desc {
   font-size: 24rpx;
-  color: var(--text-light);
+  color: #1E1918;
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -128,12 +132,12 @@
   align-items: center;
   margin-top: 20rpx;
   padding-top: 20rpx;
-  border-top: 2rpx dashed rgba(139, 90, 43, 0.15);
+  border-top: 1rpx solid rgba(30, 25, 24, 0.65);
 }
 
 .meta-left {
   font-size: 22rpx;
-  color: var(--text-light);
+  color: #1E1918;
   display: flex;
   gap: 24rpx;
 }

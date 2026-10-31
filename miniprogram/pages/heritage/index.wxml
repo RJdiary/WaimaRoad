@@ -1,6 +1,7 @@
 <view class="page">
   <view class="heritage-header">
     <view class="title serif">埠藏史库</view>
+    <view class="header-book">⌁</view>
     <view class="subtitle">外马路 · 现存与消失的人文空间</view>
   </view>
 
@@ -23,8 +24,12 @@
       data-id="{{item.id}}"
       data-category="{{item.category}}"
     >
-      <view class="heritage-card-img {{item.isAiRestored ? 'ai-restored' : ''}}" style="{{item.imgStyle}}">
-        {{item.emoji}}
+      <view class="heritage-card-img {{item.isAiRestored ? 'ai-restored' : ''}}">
+        <image wx:if="{{item.id === 1}}" class="heritage-cover" src="../../images/design/heritage-customs.jpg" mode="aspectFill"></image>
+        <image wx:elif="{{item.id === 5 || item.id === 6}}" class="heritage-cover" src="../../images/design/heritage-ancestral.jpg" mode="aspectFill"></image>
+        <image wx:elif="{{item.category === 'red'}}" class="heritage-cover" src="../../images/design/explore-revolution.jpg" mode="aspectFill"></image>
+        <image wx:elif="{{item.category === 'ai'}}" class="heritage-cover" src="../../images/design/explore-restoration.jpg" mode="aspectFill"></image>
+        <image wx:else class="heritage-cover" src="../../images/design/explore-port.jpg" mode="aspectFill"></image>
         <view class="heritage-badge {{item.category}}">{{item.categoryName}}</view>
       </view>
       <view class="heritage-card-body">

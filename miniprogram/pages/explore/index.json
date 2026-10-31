@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "探索",
+  "navigationStyle": "custom",
   "usingComponents": {
     "ai-chat": "../../components/aiChat/index"
   }

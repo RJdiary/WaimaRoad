@@ -4,22 +4,26 @@
 }
 
 .street-header {
-  padding: 32rpx 40rpx;
-  background: linear-gradient(180deg, var(--warm-cream) 0%, transparent 100%);
+  padding: calc(var(--miniapp-action-clearance) + 8rpx) 48rpx 34rpx 146rpx;
+  background: transparent;
+  position: relative;
 }
 
 .street-header .title {
-  font-size: 52rpx;
+  font-size: 56rpx;
   font-weight: 700;
   color: var(--primary-brown-dark);
   letter-spacing: 4rpx;
 }
 
 .street-header .subtitle {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: var(--text-light);
   margin-top: 8rpx;
 }
+
+.street-sign { position: absolute; left: 48rpx; top: calc(var(--miniapp-action-clearance) + 10rpx); width: 68rpx; height: 68rpx; border-radius: 12rpx; background: #D7654B; color: #FFF4D9; text-align: center; line-height: 68rpx; font-size: 54rpx; transform: rotate(-8deg); box-shadow: 0 5rpx 0 #BF513C; }
+.street-pin { position: absolute; right: 54rpx; top: calc(var(--miniapp-action-clearance) + 8rpx); width: 68rpx; height: 68rpx; border: 5rpx solid #E88462; border-radius: 50%; color: #E88462; font-size: 64rpx; line-height: 56rpx; text-align: center; }
 
 .route-cards {
   padding: 24rpx 32rpx 180rpx;
@@ -28,10 +32,10 @@
 }
 
 .route-card {
-  background: #fff;
+  background: #FFE5B8;
   border-radius: 36rpx;
   padding: 36rpx;
-  box-shadow: 0 4rpx 20rpx rgba(139, 90, 43, 0.12);
+  box-shadow: none;
   margin-bottom: 28rpx;
 }
 

@@ -5,6 +5,7 @@
 
 .detail-hero {
   height: 480rpx;
+  margin-top: var(--miniapp-action-clearance);
   position: relative;
   display: flex;
   align-items: center;
