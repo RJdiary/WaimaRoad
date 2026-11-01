@@ -1,0 +1,4 @@
+<view class="section-title">
+  <text class="section-title__text {{calligraphy ? 'text-calligraphy' : ''}}">{{title}}</text>
+  <view wx:if="{{more}}" class="section-title__more tap" bindtap="onMore"><text>{{more}}</text><text class="section-title__arrow">›</text></view>
+</view>

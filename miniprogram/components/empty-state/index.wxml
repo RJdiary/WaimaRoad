@@ -1,0 +1,7 @@
+<view class="empty-state">
+  <image wx:if="{{image}}" class="empty-state__image" src="{{image}}" mode="aspectFit" />
+  <view wx:else class="empty-state__placeholder"><view class="empty-state__mark"></view></view>
+  <text class="empty-state__title">{{title}}</text>
+  <text class="empty-state__desc ellipsis-2">{{desc}}</text>
+  <button wx:if="{{actionText}}" class="empty-state__action tap" bindtap="onAction">{{actionText}}</button>
+</view>

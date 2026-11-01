@@ -1,0 +1,4 @@
+.section-title { display: flex; align-items: center; justify-content: space-between; min-height: 88rpx; }
+.section-title__text { color: var(--ink); font-size: calc(36rpx * var(--fs)); font-weight: 600; }
+.section-title__more { display: flex; align-items: center; justify-content: flex-end; gap: 8rpx; color: var(--ink-3); font-size: calc(24rpx * var(--fs)); }
+.section-title__arrow { font-size: 32rpx; }
