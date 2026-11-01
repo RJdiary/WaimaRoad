@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "史料", "enablePullDownRefresh": true }
+{ "navigationStyle": "custom", "navigationBarTitleText": "史料", "enablePullDownRefresh": true, "usingComponents": { "filter-chips": "../../components/filter-chips/index", "site-card": "../../components/site-card/index", "empty-state": "../../components/empty-state/index", "skeleton": "../../components/skeleton/index" } }
