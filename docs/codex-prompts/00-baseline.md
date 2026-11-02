@@ -190,6 +190,34 @@ miniprogram/
 - 未登录触发上述动作时：先存 `redirect`（目标页路径 + 参数），跳登录页；登录成功后按 `redirect` 原路回跳，无 `redirect` 时回「我的」。登录页自身不写死回跳目标。
 - 返回统一 `wx.navigateBack()`；Tab 间切换统一 `wx.switchTab`。
 
+**每页导航形态（返回入口）—— 20 页的唯一口径**
+
+> 20 个页面的 `index.json` 全部是 `"navigationStyle": "custom"`，**系统导航栏与系统返回箭头已被关掉**。所以「有没有返回」完全取决于页面自己画不画。下表是唯一口径，阶段 03/04 实现时逐页对照；新增页面必须先来本表登记。
+
+| # | 页面 | 返回入口载体 | 具体形态 |
+|---|---|---|---|
+| 1—4 | `explore` / `archive` / `walk` / `profile` | **不需要** | Tab 页，靠 TabBar 切换；头部为设计稿通栏，不出现返回 |
+| 5 | `login` | **不需要** | 未登录时进入，无"上一页"可回；已登录用户进来直接 `navigateBack()` 退出 |
+| 6 | `register` | 自绘 | 白色返回箭头（44rpx，点击区 ≥88rpx），回登录页 |
+| 7 | `site-detail` | `nav-bar` | `transparent` 浮在图集上，`show-back`；右侧插槽放「分享」「收藏」 |
+| 8 | `topic` | `nav-bar` | 米色底 + 标题「专题」 |
+| 9 | `ai-restore` | `nav-bar` | 米色底 + 标题「AI 复原影像」 |
+| 10 | `route-detail` | 自绘 | 地图上 `cover-view` 左上返回钮（半透明黑底白箭头），因为要压在地图上 |
+| 11 | `walking` | 自绘 | 右上「结束走街」→ 二次确认后 `navigateBack()` 回路线详情；**不是普通返回** |
+| 12 | `checkins` | `nav-bar` | 标题「我的打卡点」+ 右侧「地图/列表」文字按钮 |
+| 13 | `favorites` | `nav-bar` | 标题「我的收藏」+ 右侧「编辑/完成」 |
+| 14 | `preferences` | `nav-bar` | 标题「喜好设置」+ 右侧「保存」 |
+| 15 | `font` | `nav-bar` | 标题「字体设置」 |
+| 16 | `privacy` | `nav-bar` | 标题「隐私设置」 |
+| 17 | `messages` | `nav-bar` | 标题「消息」+ 右侧「全部已读」 |
+| 18 | `profile-edit` | `nav-bar` | 标题「编辑资料」+ 右侧「保存」 |
+| 19 | `settings` | `nav-bar` | 标题「设置」 |
+| 20 | `search` | 自绘 | 返回箭头与搜索框同一行（不占一整条导航栏） |
+
+- 合计：**11 页用 `nav-bar`**（7/8/9、12—19）、**4 页自绘**（6/10/11/20）、**5 页不需要**（1—5 中的 Tab 与登录）。
+- 「注册 `nav-bar`」只是 `index.json` 加了 `usingComponents`，**不等于页面上有返回**；必须在页面 WXML 的第一个节点真的写 `<nav-bar show-back title="…" />`。
+- 自绘返回的 4 页也必须 `bindtap` → `wx.navigateBack()`，且点击区 ≥88rpx，不得只画箭头不绑事件。
+
 ## 6. 公共组件（`components/`）
 
 | 组件 | 入参（props，语义固定，命名在阶段 01 定） | 事件 | 用途 |

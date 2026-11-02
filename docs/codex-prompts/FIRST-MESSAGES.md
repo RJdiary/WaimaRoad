@@ -90,6 +90,7 @@
 - 只允许新增/修改：subpackages/detail/pages/{site-detail,topic,ai-restore}/*、subpackages/route/pages/{route-detail,walking}/*、
   components/{compare-slider,checkin-sheet,map-poi-sheet,route-card}/*、mock/routes.js、utils/api.js（追加接口）。
 - 原生 <map> 上的浮动元素一律用 cover-view / cover-image，普通 view 会被地图盖住。
+- 返回入口必须画：site-detail / topic / ai-restore 的第一个节点放 <nav-bar show-back>；route-detail 用地图左上 cover-view 返回钮；walking 用右上「结束走街」二次确认。只注册组件不算数（20 页都是 navigationStyle: custom，系统返回已关）。
 - 路线详情：polyline 用主题色，marker 带序号，includePoints 自动缩放；点位数以 stops.length 为准，不写死 5。
 - 打卡：≤200m 可打，>200m 按钮置灰并显示距离；同一点位当天只计一次。
 - 走街完成海报用 Canvas 2D 现画，不引 Lottie、不用外部图片；AI 复原必须标注「AI 生成 / 仅供想象」。
@@ -117,6 +118,7 @@
 - 登录页：密码掩码、失焦即校验、错误抖动 300ms、Mock 账号 baibianwaimatu / 123456、验证码 123456。
 - 未登录点「打卡/收藏/走街开始/我的数据」→ 写 redirect → 跳登录 → 成功后原路回跳；浏览与搜索不拦。
 - 我的页 600ms 数字滚动；菜单 5 项顺序不可变。
+- 返回入口必须画：checkins / favorites / preferences / font / privacy / messages / profile-edit / settings 共 8 页，第一个节点放 <nav-bar show-back>；register 与 search 自绘返回箭头。只注册组件不算数（20 页都是 navigationStyle: custom，系统返回已关）。
 
 完成后输出：验收勾选表 + 未做项 + 偏离项。
 ```

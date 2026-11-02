@@ -37,7 +37,13 @@
 
 - 页面 json：全部 `"navigationStyle": "custom"`，标题分别「史料详情」「专题」「AI 复原影像」「走街」「路线详情」「走街进行中」。
 - 分包组件路径：`subpackages/*` 下用 `../../../../components/<name>/index`；`pages/walk` 用 `../../components/<name>/index`。
-- `site-detail` 注册 `nav-bar`、`compare-slider`、`checkin-sheet`；`topic` 注册 `nav-bar`、`site-card`、`filter-chips`、`empty-state`；`ai-restore` 注册 `nav-bar`、`compare-slider`、`empty-state`；`walk` 注册 `route-card`、`empty-state`、`skeleton`；`walking` 注册 `checkin-sheet`。
+- `site-detail` 注册 **并使用** `nav-bar`、`compare-slider`、`checkin-sheet`；`topic` 注册 **并使用** `nav-bar`、`site-card`、`filter-chips`、`empty-state`；`ai-restore` 注册 **并使用** `nav-bar`、`compare-slider`、`empty-state`；`walk` 注册 `route-card`、`empty-state`、`skeleton`；`walking` 注册 `checkin-sheet`。
+- **返回入口（必做，不可省）**：本阶段 6 个页面全部是 `"navigationStyle": "custom"`，系统返回箭头已被关掉，返回必须自己画。按基线 §5「每页导航形态」执行：
+  - `site-detail` / `topic` / `ai-restore`：WXML **第一个节点**必须是 `<nav-bar show-back title="史料详情|专题|AI 复原影像" />`；`site-detail` 用 `transparent` 压在图集上，右侧插槽放「分享」「收藏」。
+  - `route-detail`：地图上的 `cover-view` 左上返回钮，`bindtap` → `wx.navigateBack()`，点击区 ≥88rpx。
+  - `walking`：右上「结束走街」→ `wx.showModal` 二次确认 → `wx.navigateBack()` 回路线详情（语义是"结束"，不是普通返回）。
+  - `walk`（Tab 页）不需要返回。
+- 只注册组件、页面里不写 `<nav-bar>` 标签，**视为未完成**——这 3 个页面若首节点没有 nav-bar，直接判不通过。
 - 禁止创建旧路径 `pages/heritage*`、`pages/street*`、`pages/mine*`，禁止模板遗留页面与组件。
 
 ## 4. 各页面详细要求
@@ -221,6 +227,7 @@
 ## 7. 验收标准
 
 - [ ] 6 个页面与 4 个组件文件齐全（`map-poi-sheet` 复用阶段 02 并校准 props），均能在开发者工具编译打开，无「页面/组件不存在」。
+- [ ] **返回入口（逐页核对，缺一即不通过）**：`site-detail` / `topic` / `ai-restore` 的 WXML 第一个节点是 `<nav-bar show-back>` 且点击能回到上一页；`route-detail` 地图左上返回钮可点并 `navigateBack`；`walking` 右上「结束走街」二次确认后回路线详情；`walk` 为 Tab 页无返回。**注意「json 注册了 nav-bar」不算通过，必须是页面里真的有标签且点击有效**。
 - [ ] 史料详情：图集「1/5」、标题标签、地址导航、开放时间、距离、导语、建筑小档案、相关推荐、底部三按钮全部呈现。
 - [x] 今昔对照：容器 654×420rpx，拖动分割线百分比实时变化，左右不可越界，按钮可 ±5% 微调。
 - [ ] AI 复原：2.5s 进度、复原图替换、水印「AI 复原示意，非历史原貌」均正确；AI 复原影像页 6 组卡带「AI 生成」水印。

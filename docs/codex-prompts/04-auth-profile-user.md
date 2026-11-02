@@ -41,6 +41,11 @@
 
 - 每页固定 4 文件 `index.js` / `index.wxml` / `index.wxss` / `index.json`；分包引用组件路径为 `../../../../components/<name>/index`（checkins→pages→user→subpackages→miniprogram 四级），主包为 `../../components/<name>/index`。
 - `index.json`：`login`、`register` 仅 `{"navigationStyle":"custom"}`；`profile` 为 `{"navigationStyle":"custom","navigationBarTitleText":"我的","enablePullDownRefresh":true}`；其余 9 页 `navigationStyle: "custom"` + 标题「我的打卡点」「我的收藏」「喜好设置」「字体设置」「隐私设置」「消息」「编辑资料」「设置」「搜索」，并按需注册 `nav-bar` / `empty-state` / `section-title` / `site-card` / `skeleton`。
+- **返回入口（必做，不可省）**：本阶段 11 页全部 `navigationStyle: custom`，系统返回箭头已关掉，返回必须自己画。按基线 §5「每页导航形态」执行：
+  - 用 `nav-bar` 的 **8 页** —— `checkins`、`favorites`、`preferences`、`font`、`privacy`、`messages`、`profile-edit`、`settings`：WXML **第一个节点**必须是 `<nav-bar show-back title="…" />`，右侧插槽放该页的动作按钮（地图 / 编辑 / 保存 / 全部已读）。
+  - 自绘的 **2 页** —— `register`（白色返回箭头，回登录页）、`search`（返回箭头与搜索框同一行）。
+  - 不需要的 **2 页** —— `login`（未登录时进入，无上一页；已登录进来直接 `navigateBack()`）、`profile`（Tab 页）。
+  - **只注册组件、页面里不写 `<nav-bar>` 标签，视为未完成。**
 - 不创建任何新页面、新组件、新工具文件；协议与隐私政策用半屏弹层承载本地文案（基线路由表只有 20 条，禁止新增路由）。
 
 ## 4. 各页面详细要求
@@ -319,6 +324,7 @@
 - [ ] 49 个文件全部创建，`app.json` 中 `pages/register/index` 与 9 个 user 分包路径均存在且可编译；控制台无「页面不存在」「组件未找到」。
 - [ ] 登录页背景铺满、顶部白色渐隐、底部黑色叠色正确；标题为「欢迎」「请登录账号」两行 `44rpx` `#111`；账号占位「请输入账号 / 手机号」；密码可切换明文/密文且密文为 `•`。
 - [ ] 登录按钮为 `#1A91FA`、`600×88rpx`、圆角 `44rpx`；账号 <4 位或密码 <6 位时下划线变 `#E05B4A` 并出现 `22rpx` 错误文案，失焦即校验。
+- [ ] **返回入口（逐页核对，缺一即不通过）**：`checkins`、`favorites`、`preferences`、`font`、`privacy`、`messages`、`profile-edit`、`settings` 共 8 页，WXML 第一个节点是 `<nav-bar show-back>`，点击回到上一页；`register` 白色返回箭头可点；`search` 返回箭头可点；`login` 与 `profile` 不需要返回。**「json 注册了 nav-bar」不算通过**。
 - [ ] 用 `baibianwaimatu` / `123456` 可登录，Toast「欢迎回来」；错误账号 Toast「账号或密码不正确」且表单抖动；登录中按钮显示「登录中…」不可重复点击。
 - [ ] 第三方入口为微信、QQ 两个 `48rpx` 图标、间距 `120rpx`；点 QQ 仅 Toast「请使用微信登录」；点微信走 `wx.login` 后 Mock 登录成功，首次自动建号。
 - [ ] 从打卡/收藏/走街/我的数据入口未登录触发时进入登录页，登录后回到原目标页；无 `redirect` 时切到「我的」。

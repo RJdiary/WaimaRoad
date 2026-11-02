@@ -391,6 +391,7 @@
 - 全仓库不出现旧命名（`heritage*` / `street*` / `mine*`）、模板命名（`quickstart` / `goods` / `examples`）、济南地名。
 - 页面数据统一走 `utils/api.js`，不得写死统计数字，不得直接 `require('mock/*')`。
 - 字体缩放全局生效并持久化；空态 / 骨架 / 失败态齐备。
+- **每个已实现页面的首屏要有实质内容**（不能只有底部 TabBar）；**每个二级页有可见的返回入口**（20 页均为 `navigationStyle: custom`，系统返回已被关掉，见 `00-baseline.md` §5「每页导航形态」）。
 - README 含运行步骤、Mock 账号、素材替换清单。
 
 ---

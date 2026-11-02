@@ -128,6 +128,24 @@ Get-ChildItem miniprogram -Recurse -File -Include *.js,*.json,*.wxml,*.wxss |
 3. 打开 `01-scaffold-theme.md` 文末的验收清单，逐条勾。
 4. 有勾不上的，把**报错原文**贴回给 Codex，不要只说"报错了"。
 
+**两个"清单过了也不算过"的肉眼项**（每次都要看一眼）：
+
+| 看什么 | 怎么看 | 不合格的样子 |
+| --- | --- | --- |
+| 首屏有没有实质内容 | 打开该页不滚动 | 一片空白，只有底部 TabBar（多半是阶段 01 的空壳 `<view class="page page--tab">` 没删，还留在第一行） |
+| 二级页有没有返回 | 看页面左上角 | 什么都没有（`navigationStyle: custom` 关掉了系统返回，必须自己画，见基线 §5「每页导航形态」） |
+
+自查命令（列出"没有返回入口"的页面，逐个确认它是不是 Tab 页/登录页）：
+
+```powershell
+Get-ChildItem miniprogram -Recurse -Filter index.wxml | ForEach-Object {
+  $c = Get-Content $_.FullName -Raw -Encoding UTF8
+  if ($c -notmatch '<nav-bar|navigateBack|结束走街') { "缺返回候选: " + $_.FullName.Substring(20) }
+}
+```
+
+预期只出现 `pages/explore`、`pages/archive`、`pages/walk`、`pages/profile`、`pages/login`（这 5 个本来就不需要返回）；**出现别的就是缺返回**。
+
 ### ⑧ 提交
 
 验收全绿之后，三行命令，别多想：
