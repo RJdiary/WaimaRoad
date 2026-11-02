@@ -437,6 +437,7 @@ if (ids.length) {
 
 1. **不引入后端依赖**：不建云函数、不调 `wx.cloud.database()`、不引 npm 包、不请求外部域名；数据只来自 `mock/` + `wx.setStorageSync`。
 2. **不残留旧版命名**：禁止 `pages/heritage*`、`pages/street*`、`pages/mine*`、`utils/db.js`、`utils/data.js`、`quickstart`、`goods/examples/business/usercenter`；产品名只用「埠影寻踪」，「埠藏史库」仅可作为 slogan 与书法文案。
+   - 作用域：**只约束 `miniprogram/` 与 `project.config.json`**。`docs/`、`AGENTS.md`、`.trae/skills/` 中出现这些词属于「声明禁令」，不算违规，不得为过检查去改文档。
 3. **所有页面必须走 `api.js`**：页面不得出现写死的 `2.6k`、`860`、种子数组或 `wx.getStorageSync('byxz_checkins')` 直接读取业务数据。
 4. **不改契约**：不得改 20 条路由、7 个模型字段名、`kaibu|qiaoxiang|wenjiao|hongse` 枚举、18 个色值 Token 与 `byxz_` 前缀。
 5. **不写空壳**：不得用 `TODO` 占位核心逻辑，不得返回空数组让页面「看起来能跑」；Mock 必须完整可渲染。

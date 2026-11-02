@@ -281,22 +281,30 @@ miniprogram/assets/
 - 产品名一律「埠影寻踪」；「埠藏史库」「街绘行图」只允许作为 Slogan 与书法排版文案，不得当页面标题或小程序名。
 - 本阶段不写「页面建设中」等临时文案，空壳不显示文字；可见文案在阶段 02—04 落地。
 ## 6. 验收标准
-- [ ] `miniprogram/` 根下有 `app.js`、`app.json`、`app.wxss`、`sitemap.json`，`custom-tab-bar/`、`components/`、`utils/`、`assets/` 均已建立。
-- [ ] `app.json` 可被 `JSON.parse`；`pages` 长度 6、`subpackages` 长度 3、路由合计 20 条且顺序与基线 §5 一致；不含 `heritage`、`street`、`mine`、`pages/index/index`、`pages/example/index`。
-- [ ] `tabBar.custom === true`，`list` 恰 4 项，`pagePath`/`text` 与 4.2 一致，8 个图标文件均存在。
-- [ ] `window` 5 个键值与 4.2 完全一致；`style` 为 `"v2"`、无 Skyline 配置；`lazyCodeLoading` 为 `"requiredComponents"`。
-- [ ] `permission.scope.userLocation.desc` 为「用于展示附近史迹并验证到点打卡」；`requiredPrivateInfos` 含三个接口；`__usePrivacyCheck__` 为 `true`。
-- [ ] `app.wxss` 的 `page` 含全部 18 个色彩变量，名称与色值与基线 §4.2 逐字相同。
-- [ ] `app.wxss` 含 `--fs`、6 个圆角/阴影变量、7 个字体类、`.text-calligraphy` 陶土渐变、`.page`、`.page--tab`、`.safe-bottom`、`.tap`、`.card`、`.media-placeholder` 与两个关键帧。
-- [ ] `app.js` 含 `token/isLogin/userInfo/fontScale/preferences/statusBarHeight/navBarHeight/navTotalHeight/safeAreaBottom/windowWidth/capsule`，`fontScale` 默认 `1`。
-- [ ] `app.js` 用 `wx.getWindowInfo()` 换算 88rpx 导航高度，不写死 `20px/44px`，胶囊取值有 `try/catch`；不调用 `wx.cloud.init`、不强制登录。
-- [ ] `setFontScale` 夹取 0.9—1.3、保留两位小数、写 `byxz_font_scale`；`getPageStyle()` 返回 `--fs:<值>;`。
-- [ ] `custom-tab-bar` 4 项可切换、高亮同步；高度 `112rpx + env(safe-area-inset-bottom)`、背景 `#F0E0C7`、无圆角/阴影/上边框。
-- [ ] 5 个组件均为 4 文件、`index.json` 含 `"component": true`；`nav-bar` 在刘海屏与胶囊下不遮挡内容。
-- [ ] `utils/storage.js` 所有 key 以 `byxz_` 开头；`formatCount(2600) === '2.6k'`、`formatCount(12000) === '1.2w'`；`api.js` 有 `USE_MOCK = true` 且不 require `mock/`。
-- [ ] 20 条路由均可在模拟器打开，控制台无红色报错；4 个 Tab 页底部不被 TabBar 遮挡，滚动时 TabBar 不隐藏。
-- [ ] `project.config.json` 的 `appid`、`libVersion`、`projectname` 未变，`cloudfunctionTemplateRoot` 已删除。
-- [ ] 全仓库 grep 不到 `quickstart`、`databaseGuide`、`goods`、`examples`、`business`、`usercenter`、`heritage`、`street`、`mine`、`cloudTipModal`、`install_tip`。
+- [x] `miniprogram/` 根下有 `app.js`、`app.json`、`app.wxss`、`sitemap.json`，`custom-tab-bar/`、`components/`、`utils/`、`assets/` 均已建立。
+- [x] `app.json` 可被 `JSON.parse`；`pages` 长度 6、`subpackages` 长度 3、路由合计 20 条且顺序与基线 §5 一致；不含 `heritage`、`street`、`mine`、`pages/index/index`、`pages/example/index`。
+- [x] `tabBar.custom === true`，`list` 恰 4 项，`pagePath`/`text` 与 4.2 一致，8 个图标文件均存在。
+- [x] `window` 5 个键值与 4.2 完全一致；`style` 为 `"v2"`、无 Skyline 配置；`lazyCodeLoading` 为 `"requiredComponents"`。
+- [x] `permission.scope.userLocation.desc` 为「用于展示附近史迹并验证到点打卡」；`requiredPrivateInfos` 含三个接口；`__usePrivacyCheck__` 为 `true`。
+- [x] `app.wxss` 的 `page` 含全部 18 个色彩变量，名称与色值与基线 §4.2 逐字相同。
+- [x] `app.wxss` 含 `--fs`、6 个圆角/阴影变量、7 个字体类、`.text-calligraphy` 陶土渐变、`.page`、`.page--tab`、`.safe-bottom`、`.tap`、`.card`、`.media-placeholder` 与两个关键帧。
+- [x] `app.js` 含 `token/isLogin/userInfo/fontScale/preferences/statusBarHeight/navBarHeight/navTotalHeight/safeAreaBottom/windowWidth/capsule`，`fontScale` 默认 `1`。
+- [x] `app.js` 用 `wx.getWindowInfo()` 换算 88rpx 导航高度，不写死 `20px/44px`，胶囊取值有 `try/catch`；不调用 `wx.cloud.init`、不强制登录。
+- [x] `setFontScale` 夹取 0.9—1.3、保留两位小数、写 `byxz_font_scale`；`getPageStyle()` 返回 `--fs:<值>;`。
+- [x] `custom-tab-bar` 4 项可切换、高亮同步；高度 `112rpx + env(safe-area-inset-bottom)`、背景 `#F0E0C7`、无圆角/阴影/上边框。
+- [x] 5 个组件均为 4 文件、`index.json` 含 `"component": true`；`nav-bar` 在刘海屏与胶囊下不遮挡内容。
+- [x] `utils/storage.js` 所有 key 以 `byxz_` 开头；`formatCount(2600) === '2.6k'`、`formatCount(12000) === '1.2w'`；`api.js` 有 `USE_MOCK = true` 且不 require `mock/`。
+- [x] 20 条路由均可在模拟器打开，控制台无红色报错；4 个 Tab 页底部不被 TabBar 遮挡，滚动时 TabBar 不隐藏。
+- [x] `project.config.json` 的 `appid`、`libVersion`、`projectname` 未变，`cloudfunctionTemplateRoot` 已删除。
+- [x] 命名回流检查（**只扫代码产物，不扫 `docs/`**）：
+
+  ```powershell
+  Get-ChildItem miniprogram -Recurse -File -Include *.js,*.json,*.wxml,*.wxss |
+    Select-String -Pattern 'pages/heritage|pages/street|pages/mine|heritageDetail|streetMap|aiCompare|quickstart|databaseGuide|cloudTipModal|install_tip|usercenter|goods|examples|business'
+  ```
+
+  结果必须为空；`project.config.json` 中不得出现 `databaseGuide`、`cloudfunctionTemplateRoot`、`quickstart`；`utils/db.js`、`utils/data.js` 不得存在。
+  说明：`docs/`、`AGENTS.md`、`.trae/skills/` 里出现这些词是**正常的**——文档是在声明禁令。**不得**为了"让 grep 干净"去删改文档，也不得把 HTML 注释、变量名做同音替换来绕过。
 
 ## 7. 约束与禁止事项
 ### 7.1 硬约束

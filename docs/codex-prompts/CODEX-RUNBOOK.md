@@ -24,7 +24,7 @@ Codex 每个会话开始都会自动读根目录的 `AGENTS.md`（也可以手�
 
 ---
 
-## 1. 每个阶段的固定循环（01 → 05 都一样）
+## 1. 每个阶段的固定循环（01 → 09 都一样）
 
 ```
 ① 新开会话  → ② 发第一条消息 → ③ 让它复述 → ④ 批准计划 → ⑤ 执行 → ⑥ /diff 自检 → ⑦ 编译验收 → ⑧ 提交
@@ -51,14 +51,35 @@ Codex 每个会话开始都会自动读根目录的 `AGENTS.md`（也可以手�
 3. docs/codex-prompts/01-scaffold-theme.md（本阶段规格）
 
 要求：
-- 先复述本阶段要创建的文件清单与验收口径（不超过 12 行），等我确认后再写代码。
+- 先复述实现方案（≤15 行）：① 要建/改哪些文件 ② 每个文件怎么实现（数据从哪来、组件怎么拆、关键 API/事件/存储 key）③ 最容易做错的 2 个点与你的规避办法 ④ 验收怎么逐条判。等我确认后再写代码。
 - 只创建/修改 01 文件「需创建的文件清单」里的路径，别的不许动。
 - 路径、色值、Token 名、文案逐字照抄，不要"优化"。
 ```
 
-### ③ 让它复述，你只做一件事：对照 01 的「需创建的文件清单」看有没有多/少
+> 01—08 每个阶段的完整「第一条消息」都在 `FIRST-MESSAGES.md`，直接复制，不用每次现写。
 
-多出来的文件 = 越界，直接回：`清单外的文件不要建，先只做清单里的。`
+### ③ 看复述：重点不是「知道要做什么」，而是「说清楚怎么做」
+
+合格的复述必须回答四问，缺一条就打回：
+
+| 问 | 合格的样子 | 不合格的样子 |
+| --- | --- | --- |
+| ① 做哪些文件 | 逐个列出，且都能对上阶段文件的清单 | 「我会创建相关页面和组件」 |
+| ② **怎么实现** | 说数据从哪来（`api.xxx` / Storage key）、组件怎么拆、关键交互用什么 API（如 `movable-area`、`wx.startLocationUpdate`、`touchmove` 算百分比）、状态放哪（`data` 还是 `globalData`） | 只报文件名，一个 API 名都不提 |
+| ③ 最易做错的 2 点 | 自己点出坑（如「地图上普通 view 会被盖住，用 cover-view」）并给规避办法 | 「应该没什么难点」 |
+| ④ 验收怎么判 | 对应到验收清单的具体条目，说明怎么自测 | 「我会保证质量」 |
+
+**只列文件名的复述，一律打回**，回这句：
+
+```text
+你只给了清单。请补三点再说：
+1) 每个文件的数据从哪来（调哪个 api 方法、读哪个 byxz_ key）；
+2) 关键交互怎么实现（用哪个小程序 API、核心算法/公式、状态存哪）；
+3) 这两处最容易出错的地方，以及你的规避办法。
+不要写代码，只补这三段。
+```
+
+复述通过后，再对照阶段文件的「需创建的文件清单」看有没有多/少——多了就是越界，回：`清单外的文件不要建，先只做清单里的。`
 
 ### ④ 批准计划（可选但推荐）
 
@@ -84,7 +105,16 @@ Codex 每个会话开始都会自动读根目录的 `AGENTS.md`（也可以手�
 /diff
 ```
 
-看三件事：**只改了清单内文件**、**没有新增依赖/package.json**、**没有旧命名（heritage/street/mine）**。
+看三件事：**只改了清单内文件**、**没有新增依赖/package.json**、**没有旧命名**。
+
+旧命名只用这条命令查，别扫全仓库：
+
+```powershell
+Get-ChildItem miniprogram -Recurse -File -Include *.js,*.json,*.wxml,*.wxss |
+  Select-String -Pattern 'pages/heritage|pages/street|pages/mine|heritageDetail|streetMap|aiCompare|quickstart|databaseGuide|cloudTipModal|install_tip|usercenter|goods|examples|business'
+```
+
+结果为空即通过。`docs/`、`AGENTS.md`、`.trae/skills/` 里出现这些词是**正常的**——那是在写「禁止这些词」的规定，不算违规，更不要为了"grep 干净"去改文档。
 想让它自己挑毛病：
 
 ```
@@ -100,15 +130,145 @@ Codex 每个会话开始都会自动读根目录的 `AGENTS.md`（也可以手�
 
 ### ⑧ 提交
 
+验收全绿之后，三行命令，别多想：
+
 ```powershell
-git add -A; git commit -m "feat(stage-01): 工程骨架与设计系统"
+git add -A
+git commit -m "feat(stage-01): 工程骨架与设计系统"
+git log --oneline -1
 ```
 
-一个阶段一个 commit，回滚才有边界。
+`git add -A` 在这里是安全的：`.design-pdf/`、`.acl-recovery/`、`prototype/` 都已在 `.gitignore` 里。具体每个阶段抄哪一行，见下面第 2 节。
 
 ---
 
-## 2. 五个阶段各自的「第一条消息」
+## 2. 每个阶段提交什么（照着抄就行）
+
+### 2.1 一句话原理
+
+commit = **给当前这一步拍个存档**。一个阶段拍一次，写坏了回到上一个存档就行，不用从头来。
+
+所以规则只有一条：**一个阶段做完、验收勾完了，才拍照**。中途别拍。
+
+### 2.2 固定套路（三行，每阶段都一样）
+
+```powershell
+git add -A
+git commit -m "<下面表格里那一行>"
+git log --oneline -1
+```
+
+第三行是用来确认"真的提交了"，会回显一条 `feat(stage-02): ...`。
+
+### 2.3 九个阶段，各抄哪一行
+
+| 阶段 | 直接复制这一行 |
+|---|---|
+| 01 | `feat(stage-01): 工程骨架与设计系统` |
+| 02 | `feat(stage-02): 探索页与史料页` |
+| 03 | `feat(stage-03): 史料详情、AI 复原与走街` |
+| 04 | `feat(stage-04): 登录注册与用户中心` |
+| 05 | `chore(stage-05): 数据层收口与整体验收` |
+| 06 | `chore(stage-06): 补充浏览器视觉原型`（一般不用提交） |
+| 07 | `feat(stage-07): 接入真实素材` |
+| 08 | `feat(stage-08): AI 知识库问答悬浮球` |
+| 09 | `feat(stage-09): 适老化模式` |
+
+`feat` = 加了功能，`chore` = 收尾/杂务，`docs` = 只改文档。不用记，表格里已经写好了。
+
+### 2.4 完整命令（连起来复制，一次一个阶段）
+
+**阶段 02**
+```powershell
+git add -A
+git commit -m "feat(stage-02): 探索页与史料页"
+git log --oneline -1
+```
+
+**阶段 03**
+```powershell
+git add -A
+git commit -m "feat(stage-03): 史料详情、AI 复原与走街"
+git log --oneline -1
+```
+
+**阶段 04**
+```powershell
+git add -A
+git commit -m "feat(stage-04): 登录注册与用户中心"
+git log --oneline -1
+```
+
+**阶段 05**
+```powershell
+git add -A
+git commit -m "chore(stage-05): 数据层收口与整体验收"
+git log --oneline -1
+```
+
+**阶段 07（素材）**
+```powershell
+git add -A
+git commit -m "feat(stage-07): 接入真实素材"
+git log --oneline -1
+```
+
+**阶段 08（AI 悬浮球）**
+```powershell
+git add -A
+git commit -m "feat(stage-08): AI 知识库问答悬浮球"
+git log --oneline -1
+```
+
+**阶段 09（适老化）**
+```powershell
+git add -A
+git commit -m "feat(stage-09): 适老化模式"
+git log --oneline -1
+```
+
+**文档改动（比如现在待提交的那 13 项）**
+```powershell
+git add -A
+git commit -m "docs: 补充 AI 问答与适老化阶段、合并提交清单"
+git log --oneline -1
+```
+
+> 01 已经提交过了（`feat(stage-01): 工程骨架与设计系统`），不用再跑。
+
+### 2.5 提交后怎么确认没混入别的东西
+
+```powershell
+git show --stat HEAD
+```
+
+看输出的文件列表：**只要都属于本阶段**就对了。比如刚提交 02，列表里出现 `pages/explore/...`、`pages/archive/...` 没问题；出现 `mock/user.js` 或 `pages/login/...`，说明 Codex 越界了，用第 6 节的办法回滚那部分。
+
+### 2.6 提交错了怎么办（三种，都简单）
+
+| 情况 | 命令 |
+|---|---|
+| 刚 `git add` 完，还没 commit，想反悔 | `git reset` （只取消暂存，文件不动） |
+| 刚 commit，发现漏了文件 | `git add -A ; git commit --amend --no-edit` （把漏的并进上一次提交） |
+| 已提交好几步，想退回上一个存档 | `git revert HEAD`（生成一个反向提交，历史不动） |
+
+**永远不要用** `git reset --hard`——它会连你没提交的代码一起删掉。
+
+### 2.7 想拆得更细（可选，不做也不影响）
+
+一个阶段太大可以拆，比如 03：
+
+```powershell
+git commit -m "feat(stage-03): 史料详情与今昔对比滑块"
+git commit -m "feat(stage-03): 专题聚合与 AI 复原影像"
+git commit -m "feat(stage-03): 走街三页与路线时间轴"
+```
+
+拆法是**按页面拆**，不要按"样式 / 逻辑"拆。
+
+---
+
+## 3. 五个阶段各自的「第一条消息」
 
 只改第一行的阶段号与文件名，其余照抄：
 
@@ -118,6 +278,11 @@ git add -A; git commit -m "feat(stage-01): 工程骨架与设计系统"
 | 03 | `03-detail-walk.md` | 今昔对比滑块能拖动；走街 4 条路线数据与 `stops.length` 一致 |
 | 04 | `04-auth-profile-user.md` | 登录 `baibianwaimatu` / `123456`；字体设置全局生效 |
 | 05 | `05-data-platform-acceptance.md` | 页面只调 `api.js`；主包 ≤2MB；跑完整走查清单 |
+| 08 | `08-ai-chat.md` | 球在除登录/注册外的 18 页都在；**拖动时页面不滚动**；地图页球不被盖住 |
+| 09 | `09-elder-mode.md` | 开关后当前页立即变大；`byxz_font_scale` 前后不变；关掉后回到用户原字号 |
+
+> 08（AI 悬浮球）不依赖 02—05，阶段 01 完成后随时可做；但要等页面都有了再一次性补 18 处挂载，否则每做一个页面都要回头改。
+> 09（适老化）依赖 04 的字体设置与 03 的路线详情，建议排最后。
 
 阶段 05 的第一条消息多一句：
 
@@ -128,7 +293,7 @@ git add -A; git commit -m "feat(stage-01): 工程骨架与设计系统"
 
 ---
 
-## 3. 可选：阶段 06（浏览器原型）
+## 4. 可选：阶段 06（浏览器原型）
 
 只在你想"先看清楚再写"时做。
 
@@ -147,7 +312,7 @@ git add -A; git commit -m "feat(stage-01): 工程骨架与设计系统"
 
 ---
 
-## 4. 阶段 07（素材接入，任何时候素材到齐都能做）
+## 5. 阶段 07（素材接入，任何时候素材到齐都能做）
 
 1. 在即时设计里按 `07-assets-swap.md` 第 2 节把图层改名 → 批量导 `PNG 2x` / 照片 `JPG q80`。
 2. 解压到 `miniprogram/assets/` 对应目录。
@@ -163,13 +328,12 @@ git add -A; git commit -m "feat(stage-01): 工程骨架与设计系统"
 
 ---
 
-## 5. 出问题怎么办
+## 6. 出问题怎么办
 
 | 情况 | 处理 |
 | --- | --- |
-| 改坏了、还没提交 | `git diff` 看范围 → `git checkout -- <文件>` 只回滚被改的文件；别 `git reset --hard` |
-| 改坏了、已提交 | `git revert` 该 commit，不要改写历史 |
-| 越界改了 `docs/`、`project.config.json` | 立刻 `git checkout -- docs project.config.json`，并把 AGENTS.md 的硬约束再贴一次 |
+| 改坏了 / 提交错了 | 见上面 2.6，那里三条命令够用；**别用 `git reset --hard`** |
+| 越界改了 `docs/`、`project.config.json` | `git checkout -- docs project.config.json` 还原，再把 AGENTS.md 的硬约束贴一次 |
 | 某个阶段反复失败 | 缩小任务：先"只建页面与样式"，通过后再"只接 api.js 数据" |
 | 上下文太长、回答开始变差 | `/compact` 压缩，或直接 `/new` 开新会话（阶段产物在文件里，不在对话里） |
 | 它坚称"设计稿没有这个规格" | 让它读 `00-baseline.md` 对应小节，而不是争论 |
@@ -177,7 +341,7 @@ git add -A; git commit -m "feat(stage-01): 工程骨架与设计系统"
 
 ---
 
-## 6. 命令速查（都用得上）
+## 7. 命令速查（都用得上）
 
 | 命令 | 用途 |
 | --- | --- |
@@ -195,7 +359,7 @@ git add -A; git commit -m "feat(stage-01): 工程骨架与设计系统"
 
 ---
 
-## 7. 十条别做的事
+## 8. 十条别做的事
 
 1. 别在一个会话里连跑 5 个阶段。
 2. 别把 `00-baseline.md` 全文粘进聊天框——让它读文件。

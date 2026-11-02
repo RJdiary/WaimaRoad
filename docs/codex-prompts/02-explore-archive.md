@@ -212,22 +212,22 @@ module.exports = { USE_MOCK, ok, fail, mock, request, getSites, getSite };
 | 加载更多 | 正在加载更多… / 已经到底啦 |
 
 ## 6. 验收标准
-- [ ] 探索页头部高 440rpx，拼贴 620×380rpx、距顶 30rpx、右边距 -24rpx、透明度 .95；两列竖排书法 56rpx、左 48rpx、顶 96rpx、列距 8rpx、陶土渐变。
-- [ ] 地图卡 `margin-top: -40rpx`、左右 48rpx、高 540rpx、圆角 24rpx、4rpx `#F5D9A8` 描边；`<map>` 中心 23.3546/116.6819、`scale=16`、`show-location`、`enable-3D=false`、无内置缩放/比例尺。
-- [ ] marker 分 4 色、显示 28×36px（56×72rpx），点击放大 1.2 倍并滑出 POI 卡；点空白收起；POI 卡宽 670rpx、高 260rpx、距底 `112rpx + 安全区 + 24rpx`。
-- [ ] 搜索按钮 72rpx 圆钮、`rgba(255,255,255,.85)`、1rpx 琥珀描边、36rpx 放大镜，滚动后吸顶右上，跳 `/subpackages/user/pages/search/index?from=explore`。
-- [ ] 2×2 入口卡宽 315rpx、高 220rpx、间距 24rpx、圆角 20rpx，3 图 4s 轮播 + 3 个 6rpx 白点；4 组标题/副标题逐字与 4.3 表一致，跳转参数正确。
-- [ ] 首次定位有半屏说明，允许后地图移到用户位置、POI 卡显示真实距离；拒绝后出现 64rpx 浅杏提示条与「去开启」，不阻塞页面。
-- [ ] 下拉刷新可重建 marker 并关闭 POI 卡；滚动后头部收起 200rpx、搜索钮吸顶，过渡 240ms、无抖动。
-- [ ] 探索页与史料页 `onShow` 正确同步 TabBar 高亮（0 / 1），`onShareAppMessage` 标题逐字一致。
-- [ ] 史料页头部 300rpx、书法标题 64rpx/字距 4rpx/左 48rpx/顶 96rpx、副标题 28rpx `#555`、右侧插画 200×180rpx。
-- [ ] 分类胶囊 5 项 key 正确、视觉高 64rpx/圆角 32rpx/`#CCCCCC`/文字 26rpx `#222`/选中 `#333` 白字、间距 20rpx，首个贴左。
-- [ ] 陶土卡背景 `#D98C75`、封面 654×390rpx、角标 `#F7B878`/22rpx `#4A2B1E`、标题 34rpx/600、描述 24rpx 两行、分割线 1rpx `rgba(255,255,255,.35)`、底部行 96rpx 且数字 k 格式化。
-- [ ] 史料页具备骨架 3 卡、空状态（含「看看全部」回到全部）、加载失败重试、上拉 10 条/页、「已经到底啦」、下拉刷新与切分类回顶。
-- [ ] 点击史料卡进入 `subpackages/detail/pages/site-detail/index?siteId=site_xxx`，页面无「页面不存在」报错；点击卡内任意区域不出现收藏按钮。
-- [ ] `mock/sites.js` 恰好 12 条、分类 4 项，id 连续且 `site_001` 文案、地址、坐标、浏览/收藏数逐字与 9.1 一致；其他点位无济南地名。
-- [ ] 页面未直接 require `mock/`、未写死统计数字；`api.getSites` 返回 `{ list, total, hasMore }`，`api.getSiteDetail('site_001')` 可返回对象。
-- [ ] 控制台无红色报错、无 Skyline/未定义组件提示；iOS 与安卓模拟器无横向溢出，TabBar 不遮挡列表底部。
+- [x] 探索页头部高 440rpx，拼贴 620×380rpx、距顶 30rpx、右边距 -24rpx、透明度 .95；两列竖排书法 56rpx、左 48rpx、顶 96rpx、列距 8rpx、陶土渐变。
+- [x] 地图卡 `margin-top: -40rpx`、左右 48rpx、高 540rpx、圆角 24rpx、4rpx `#F5D9A8` 描边；`<map>` 中心 23.3546/116.6819、`scale=16`、`show-location`、`enable-3D=false`、无内置缩放/比例尺。
+- [x] marker 分 4 色、显示 28×36px（56×72rpx），点击放大 1.2 倍并滑出 POI 卡；点空白收起；POI 卡宽 670rpx、高 260rpx、距底 `112rpx + 安全区 + 24rpx`。
+- [x] 搜索按钮 72rpx 圆钮、`rgba(255,255,255,.85)`、1rpx 琥珀描边、36rpx 放大镜，滚动后吸顶右上，跳 `/subpackages/user/pages/search/index?from=explore`。
+- [x] 2×2 入口卡宽 315rpx、高 220rpx、间距 24rpx、圆角 20rpx，3 图 4s 轮播 + 3 个 6rpx 白点；4 组标题/副标题逐字与 4.3 表一致，跳转参数正确。
+- [x] 首次定位有半屏说明，允许后地图移到用户位置、POI 卡显示真实距离；拒绝后出现 64rpx 浅杏提示条与「去开启」，不阻塞页面。
+- [x] 下拉刷新可重建 marker 并关闭 POI 卡；滚动后头部收起 200rpx、搜索钮吸顶，过渡 240ms、无抖动。
+- [x] 探索页与史料页 `onShow` 正确同步 TabBar 高亮（0 / 1），`onShareAppMessage` 标题逐字一致。
+- [x] 史料页头部 300rpx、书法标题 64rpx/字距 4rpx/左 48rpx/顶 96rpx、副标题 28rpx `#555`、右侧插画 200×180rpx。
+- [x] 分类胶囊 5 项 key 正确、视觉高 64rpx/圆角 32rpx/`#CCCCCC`/文字 26rpx `#222`/选中 `#333` 白字、间距 20rpx，首个贴左。
+- [x] 陶土卡背景 `#D98C75`、封面 654×390rpx、角标 `#F7B878`/22rpx `#4A2B1E`、标题 34rpx/600、描述 24rpx 两行、分割线 1rpx `rgba(255,255,255,.35)`、底部行 96rpx 且数字 k 格式化。
+- [x] 史料页具备骨架 3 卡、空状态（含「看看全部」回到全部）、加载失败重试、上拉 10 条/页、「已经到底啦」、下拉刷新与切分类回顶。
+- [x] 点击史料卡进入 `subpackages/detail/pages/site-detail/index?siteId=site_xxx`，页面无「页面不存在」报错；点击卡内任意区域不出现收藏按钮。
+- [x] `mock/sites.js` 恰好 12 条、分类 4 项，id 连续且 `site_001` 文案、地址、坐标、浏览/收藏数逐字与 9.1 一致；其他点位无济南地名。
+- [x] 页面未直接 require `mock/`、未写死统计数字；`api.getSites` 返回 `{ list, total, hasMore }`，`api.getSiteDetail('site_001')` 可返回对象。
+- [x] 控制台无红色报错、无 Skyline/未定义组件提示；iOS 与安卓模拟器无横向溢出，TabBar 不遮挡列表底部。
 
 ## 7. 约束与禁止事项
 ### 7.1 硬约束

@@ -1,4 +1,4 @@
-﻿# 阶段 4：登录、注册、我的页与用户中心二级页
+# 阶段 4：登录、注册、我的页与用户中心二级页
 
 > 执行者只读：本文件 + `docs/codex-prompts/00-baseline.md`。先复述「本阶段要实现什么」，再写代码。所有路径、色值、文案、字段、Storage key 均已给定，照抄执行，禁止改名改值。旧的阶段 4 提示词已整体作废（与基线冲突），不得参照、不得复用其中任何名称。
 
@@ -27,7 +27,7 @@
 |---|---|---|---|
 | 1 | `pages/login/*` | `miniprogram/pages/login/` | 全屏照片背景、欢迎标题、账号/密码下划线表单、掩码切换、主蓝登录按钮、忘记密码、注册入口、微信/QQ 图标、`redirect` 回跳 |
 | 2 | `pages/register/*` | `miniprogram/pages/register/` | 遮罩背景 + 白色表单卡、白色返回箭头、昵称/手机号/验证码/密码/确认密码、协议勾选、注册并登录 |
-| 3 | `pages/profile/*` | `miniprogram/pages/profile/` | 手绘封面、头像昵称两态、三列统计、浅杏菜单卡 5 项、设置与消息入口、下拉刷新统计 |
+| 3 | `pages/profile/*` | `miniprogram/pages/profile/` | 手绘封面、头像昵称两态、三列统计、浅杏菜单卡 5 项（阶段 09 会在末尾追加第 6 项「适老化模式」，前 5 项顺序仍不可变）、设置与消息入口、下拉刷新统计 |
 | 4 | `subpackages/user/pages/checkins/*` | 分包 `user` | 列表/地图双视图、统计条、分类筛选、空状态、点击进详情 |
 | 5 | `subpackages/user/pages/favorites/*` | 分包 `user` | 四 Tab、复用史料卡、取消收藏、编辑态批量取消、左滑删除、分页、空状态 |
 | 6 | `subpackages/user/pages/preferences/*` | 分包 `user` | 主题 2×2 大卡、推荐偏好 5 档滑块、3 个通知 Switch、内容显示 2 项、保存 |

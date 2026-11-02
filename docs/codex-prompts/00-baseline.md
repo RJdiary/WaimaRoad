@@ -205,8 +205,11 @@ miniprogram/
 | `compare-slider` | 今昔两图、初始百分比 | 拖动百分比变化（`touchmove` 计算） | 今昔对比滑块，支持无障碍按钮微调 |
 | `checkin-sheet` | 点位名、累计数、印章样式 | 分享点击 | 打卡成功半屏卡 |
 | `map-poi-sheet` | 点位数据（缩略图/标题/分类/距离） | 详情/打卡/收藏三个文字按钮 | 地图点位底部卡 |
+| `ai-ball` | `bounds`（可拖动区域，rpx）、`cover`（是否走 `cover-view`）、`bottom`（距底 rpx） | 打开面板 | 全局 AI 悬浮球：拖动、边缘吸附、位置记忆（阶段 08） |
+| `ai-panel` | 初始快捷问题组、`pageKey` | 关闭、发问 | AI 问答半屏面板：消息列表、输入、三态、历史（阶段 08） |
 
 - 全部组件用 `externalClasses` 或 CSS 变量适配主题，不写死颜色；阶段 01 只实现 `nav-bar`、`tab-icon`、`section-title`、`empty-state`、`skeleton`，其余随对应页面阶段落地。
+- `ai-ball` / `ai-panel` 由阶段 08 落地；`ai-ball` 在 `app.json` 全局注册，但**每页 WXML 仍要放一行**（小程序没有全局插入节点机制），登录、注册页不放。
 
 ## 7. 数据模型索引（详细字段与 Mock 数据在阶段 05）
 
@@ -229,6 +232,7 @@ miniprogram/
 | `aiRestored` | String | AI 复原图路径；页面须标注「AI 生成 / 仅供想象」 |
 | `audio` | `{url, duration}` | 语音导览，`url` 可为空 |
 | `tags` | Array\<String\> | 如 `["海关","开埠","洋行"]` |
+| `facilities` | Array\<String\> | **阶段 09 追加，可缺省（视为 `[]`）**：`seat` 座椅 / `accessible` 无障碍入口 / `ramp` 坡道 / `toilet` 卫生间 / `shade` 遮阴 |
 
 ### 7.2 Route（路线）
 
@@ -318,6 +322,9 @@ POST /ai/restore          { siteId }
 | `byxz_walk_progress` | Object | `{ [routeId]: { startAt, doneStops: [] } }` |
 | `byxz_subscribe` | Object | `{ checkin, route, system }` 订阅状态 |
 | `byxz_locationTip` | Boolean | 「开启定位」提示条是否已展示过（探索页，避免每次进入都打扰） |
+| `byxz_ai_ball_pos` | Object | AI 悬浮球位置 `{ side: 'left'\|'right', y: Number }`（阶段 08） |
+| `byxz_ai_history` | Array | AI 对话历史 `[{ role, text, ts, refs? }]`，≤50 条（阶段 08） |
+| `byxz_elder_mode` | Boolean | 适老化模式开关，默认 false（阶段 09） |
 
 ## 8. 关键业务规则（逐条保留）
 
@@ -331,6 +338,8 @@ POST /ai/restore          { siteId }
 8. **AI 复原**：必须标注「AI 生成 / 仅供想象」，不得暗示历史真实性；不做人脸。
 9. **分享**：史料、路线、打卡海报均可分享；分享标题带「埠影寻踪」。
 10. **内容合规**：用户昵称、简介做敏感词过滤；无公开 UGC 评论区，降低审核风险。
+11. **AI 问答**（阶段 08）：入口为全局悬浮球（登录、注册页除外），拖动只动球不动页面；每条回答必须带「AI 生成，请以史料原文为准」；回答范围限外马路史料与走街/打卡规则，超范围统一拒答并引导查阅官方资料；提问与回答不上报第三方，历史仅存本地 ≤50 条。
+12. **适老化模式**（阶段 09）：一键开关，全局 `--fs: 1.3` + 点击区 ≥112rpx + 隐藏装饰 + 关动效；**不写 `byxz_font_scale`**（关闭后要能回到用户原字号）；只覆盖变量与尺寸，不改信息架构、不新增 Token；路线详情与走街页须展示 `Site.facilities` 适老设施。
 
 ## 9. 平台能力与权限
 
@@ -394,6 +403,8 @@ POST /ai/restore          { siteId }
 | 03 | `03-detail-walk.md` | 史料详情、专题聚合、AI 复原（含对比滑块）、走街页、路线详情、走街进行中（定位打卡 + 完成海报） | 本文件 + 03 |
 | 04 | `04-auth-profile-user.md` | 登录、注册、我的页、用户中心二级页（打卡点/收藏/喜好/字体/隐私/消息/资料/设置/搜索） | 本文件 + 04 |
 | 05 | `05-data-platform-acceptance.md` | 数据层收口：`mock/*`、`utils/api.js` 全量接口、数据模型字段、业务规则、平台能力落地、性能与验收走查 | 本文件 + 05 |
+| 08（功能） | `08-ai-chat.md` | AI 知识库问答：全局悬浮球（18 页挂载）+ 问答面板 + `utils/ai.js` provider 抽象（mock / ima / api）+ 合规标识；不改页面版式，不新增路由 | 本文件 + 08 + `docs/prd.md` §4.8 |
+| 09（功能） | `09-elder-mode.md` | 适老化模式：一键大字号 + 大点击区 + 隐藏装饰 + 关动效；路线与走街页展示 `Site.facilities` 适老设施；不改信息架构 | 本文件 + 09 |
 | 07（收尾） | `07-assets-swap.md` | 素材接入：把设计稿细节图与实拍照片按命名/尺寸接进 `assets/`，替换占位图；只改图片路径与 `mock` 字段，不动版式与 Token | 本文件 §10 + 07 |
 
 - 会话行为约定见 `docs/codex-prompts/AGENTS.md`（复制到仓库根目录后由 Codex 自动加载）。

@@ -20,6 +20,7 @@
 docs/
   codex-prompts/
     CODEX-RUNBOOK.md          在 Codex 里一步步怎么操作（先看这个）
+    FIRST-MESSAGES.md         每个阶段可直接复制的「第一条消息」
     AGENTS.md                 Codex 工作约定（复制到仓库根目录后生效）
     README.md                 提示词包说明与执行路径
     00-baseline.md            共享事实源：产品定义、设计 Token、路由表、组件约定、数据模型、规则、命名禁忌
@@ -30,6 +31,8 @@ docs/
     05-data-platform-acceptance.md 阶段 5：数据层、Mock、API、业务规则、平台能力与验收
     06-web-prototype-buildwebapps.md 可选的浏览器原型阶段（build-web-apps 插件）
     07-assets-swap.md         收尾阶段：素材接入（设计稿细节图 / 实拍照片替换占位）
+    08-ai-chat.md             功能阶段：AI 知识库问答（全局可拖动悬浮球 + 问答面板）
+    09-elder-mode.md          功能阶段：适老化模式（一键大字号 + 路线适老设施）
   prd.md                      产品需求文档 V2.0（做什么、验收口径）
   ui_design.html              视觉规范与 6 屏原型（浏览器直接打开）
   cloud-database.md           数据层、Storage key、云开发迁移

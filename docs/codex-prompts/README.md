@@ -11,6 +11,7 @@
 | 文件 | 职责 | 产出物 |
 | --- | --- | --- |
 | `CODEX-RUNBOOK.md` | **人看的手册**：在 Codex 里怎么一步步操作（新开会话、发什么、怎么验收、怎么回滚） | 无代码 |
+| `FIRST-MESSAGES.md` | **每个阶段可直接复制的「第一条消息」** + 越界/失败/自审的备用模板 | 无代码 |
 | `AGENTS.md` | Codex 工作约定（**复制到仓库根目录**后生效）：读取顺序、硬约束、阶段协议、DoD | 无代码 |
 | `00-baseline.md` | 01–05 共享事实源：产品定义、设计 Token、路由表、组件约定、数据模型索引、业务规则、命名禁忌 | 无代码，每次任务必读 |
 | `01-scaffold-theme.md` | 工程骨架与设计系统 | `app.js` / `app.json` / `app.wxss` / `sitemap.json`、`project.config.json` 清理、`custom-tab-bar/`、20 条路由空壳、`utils/*` 骨架、5 个基础组件 |
@@ -20,6 +21,8 @@
 | `05-data-platform-acceptance.md` | 数据层、Mock、API、业务规则、平台能力与整体验收 | `utils/api.js` 最终版、`utils/storage.js`、`mock/{sites,routes,user}.js`、联调走查与验收勾选 |
 | `06-web-prototype-buildwebapps.md` | **可选前置阶段**：用 Codex `build-web-apps` 插件做浏览器视觉原型 | `prototype/index.html`（参考物，非交付物） |
 | `07-assets-swap.md` | **收尾阶段**：把设计稿细节图 / 实拍照片一一接进 `assets/`，替换占位图（只换文件与路径，不改版式） | 最终 `assets/`、`mock/sites.js` 图片字段、`assets/README.md` 台账 |
+| `08-ai-chat.md` | **功能阶段**：AI 知识库问答——全局悬浮球（18 页）+ 问答面板 + `utils/ai.js`（mock / ima / api） | `components/ai-ball`、`components/ai-panel`、`utils/ai.js`、`mock/ai.js` |
+| `09-elder-mode.md` | **功能阶段**：适老化模式——一键大字号 + 大点击区 + 隐藏装饰 + 路线适老设施标注 | `.elder` 样式层、`byxz_elder_mode`、`Site.facilities` |
 
 同级需求文档：`docs/prd.md`（PRD，做什么/验收）、`docs/ui_design.html`（视觉规范 + 6 屏原型）、`docs/cloud-database.md`（数据层与云开发迁移）。
 
