@@ -1,3 +1,4 @@
 
 
 .restore{padding:0 48rpx}.restore__notice{margin-top:120rpx;padding:24rpx;background:var(--apricot);border-radius:24rpx}.restore__card{margin-top:24rpx;padding:24rpx;background:var(--white);border-radius:24rpx}.restore__images{position:relative;height:220rpx;display:flex}.restore__images .media-placeholder{width:50%;height:100%}.restore__images text{position:absolute;right:12rpx;top:12rpx;color:var(--white)}.restore__pick,.restore__progress{margin:32rpx 0;padding:24rpx;background:var(--apricot);border-radius:24rpx}
+.restore__canvas{position:fixed;left:-1000rpx;top:-1000rpx}
