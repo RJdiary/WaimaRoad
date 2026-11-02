@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "史料详情" }
+{"navigationStyle":"custom","navigationBarTitleText":"史料详情","usingComponents":{"nav-bar":"../../../../components/nav-bar/index","compare-slider":"../../../../components/compare-slider/index","checkin-sheet":"../../../../components/checkin-sheet/index","skeleton":"../../../../components/skeleton/index","empty-state":"../../../../components/empty-state/index"}}

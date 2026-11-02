@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "AI 复原影像" }
+{"navigationStyle":"custom","usingComponents":{"nav-bar":"../../../../components/nav-bar/index","compare-slider":"../../../../components/compare-slider/index","empty-state":"../../../../components/empty-state/index"}}

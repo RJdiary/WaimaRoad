@@ -1,1 +1,3 @@
 
+
+.walk-top{position:absolute;top:40rpx;left:24rpx;right:24rpx;padding:20rpx;background:rgba(255,255,255,.9);border-radius:16rpx}.walk-card{position:absolute;left:24rpx;right:24rpx;bottom:40rpx;padding:24rpx;background:var(--white);border-radius:32rpx}.walk-card cover-view{padding:12rpx}.done{position:fixed;inset:0;z-index:10;background:var(--bg);padding:80rpx 75rpx}.done button{background:var(--blue);color:var(--white)}

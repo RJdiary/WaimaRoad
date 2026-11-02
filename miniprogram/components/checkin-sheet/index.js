@@ -1,0 +1,1 @@
+Component({ properties: { visible: { type: Boolean, value: false }, siteName: { type: String, value: '' }, count: { type: Number, value: 0 }, stampText: { type: String, value: '已打卡' }, time: { type: String, value: '' } }, methods: { close() { this.triggerEvent('close'); }, share() { this.triggerEvent('share'); } } });

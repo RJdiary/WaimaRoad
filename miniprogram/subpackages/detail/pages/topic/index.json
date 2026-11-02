@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "专题聚合" }
+{"navigationStyle":"custom","usingComponents":{"nav-bar":"../../../../components/nav-bar/index","site-card":"../../../../components/site-card/index","filter-chips":"../../../../components/filter-chips/index","empty-state":"../../../../components/empty-state/index"}}

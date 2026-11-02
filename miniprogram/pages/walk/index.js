@@ -1,7 +1,13 @@
+const api = require('../../utils/api');
+const auth = require('../../utils/auth');
 Page({
-  data: { pageStyle: '' },
+  data: { pageStyle: '', loading: true, failed: false, routes: [], checkedCounts: [], unlocked: 0, totalRoutes: 4 },
+  onLoad() { this.load(); },
+  load() { this.setData({ loading: true, failed: false }); Promise.all([api.getRoutes(), api.getMyCheckins()]).then(([routeRes, checkinRes]) => { const checked = new Set((checkinRes.data || []).map((item) => item.siteId)); const routes = routeRes.data || []; const checkedCounts = routes.map((route) => route.stops.filter((id) => checked.has(id)).length); this.setData({ routes, checkedCounts, unlocked: checkedCounts.filter((count) => count > 0).length, totalRoutes: routes.length || 4, loading: false }); }).catch(() => this.setData({ loading: false, failed: true })); },
   onShow() {
     this.setData({ pageStyle: getApp().getPageStyle() });
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().setData({ selected: 2 });
-  }
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().setData({ selected: 2 }); this.load();
+  },
+  onRouteSelect(e) { wx.navigateTo({ url: '/subpackages/route/pages/route-detail/index?routeId=' + e.detail.route.id }); },
+  onStart(e) { const url = '/subpackages/route/pages/walking/index?routeId=' + e.detail.route.id; if (auth.isLogin()) wx.navigateTo({ url }); else auth.goLogin(url); }
 });

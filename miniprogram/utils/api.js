@@ -1,5 +1,7 @@
 const USE_MOCK = true;
 const { sites } = require('../mock/sites');
+const { routes } = require('../mock/routes');
+const storage = require('./storage');
 const PAGE_SIZE = 10;
 function ok(data) { return { code: 0, data, msg: 'ok' }; }
 function fail(msg, code = -1) { return { code, data: null, msg }; }
@@ -25,7 +27,7 @@ function getSites({ category = 'all', keyword = '', page = 1, pageSize = PAGE_SI
     if (kw) list = list.filter((site) => (site.name + site.alias + site.summary).indexOf(kw) > -1);
     const total = list.length;
     const start = (page - 1) * pageSize;
-    return { list: list.slice(start, start + pageSize), total, hasMore: start + pageSize < total };
+    return { list: list.slice(start, start + pageSize).map((site) => hydrateSite(site, sites.indexOf(site))), total, hasMore: start + pageSize < total };
   });
 }
 
@@ -34,6 +36,30 @@ function getSite(id) {
   return mock(() => sites.find((site) => site.id === id) || null);
 }
 
-const getSiteDetail = getSite;
+function hydrateSite(site, index) {
+  if (!site) return null;
+  const disappeared = index % 2 === 1;
+  return Object.assign({}, site, {
+    era: site.era || (index % 3 === 0 ? '1920 年代' : index % 3 === 1 ? '1930 年代' : '1940 年代'),
+    structure: site.structure || '砖木结构', originalUse: site.originalUse || '公共建筑',
+    currentStatus: site.currentStatus || (disappeared ? '已消失' : '现存'),
+    openTime: site.openTime || '周二至周日 09:00—17:00',
+    description: site.description || site.summary,
+    images: site.images && site.images.length ? site.images : [site.cover],
+    oldPhotos: site.oldPhotos && site.oldPhotos.length ? site.oldPhotos : [{ url: '', year: '约 ' + (1920 + index * 3), source: '馆藏资料' }],
+    aiRestored: site.aiRestored || '', audio: site.audio || { url: '', duration: 0 }
+  });
+}
+function allSites() { return sites.map(hydrateSite); }
+function getSiteDetail(id) { if (!USE_MOCK) return request({ url: '/sites/' + id, method: 'GET' }); return mock(() => hydrateSite(sites.find((site) => site.id === id), sites.findIndex((site) => site.id === id))); }
+function getRoutes() { if (!USE_MOCK) return request({ url: '/routes', method: 'GET' }); return mock(() => routes.slice().sort((a, b) => a.order - b.order)); }
+function getRouteDetail(id) { if (!USE_MOCK) return request({ url: '/routes/' + id, method: 'GET' }); return mock(() => routes.find((route) => route.id === id) || null); }
+function getMyFavorites() { return mock(() => storage.get(storage.KEYS.FAVORITES, [])); }
+function getMyCheckins() { return mock(() => storage.get(storage.KEYS.CHECKINS, [])); }
+function addFavorite(targetId, type) { return mock(() => { const list = storage.get(storage.KEYS.FAVORITES, []); if (!list.some((item) => item.targetId === targetId && item.type === type)) storage.set(storage.KEYS.FAVORITES, list.concat({ id: 'fav_' + Date.now(), type, targetId, createdAt: Date.now() })); return { favorited: true }; }); }
+function removeFavorite(targetId, type) { return mock(() => { const list = storage.get(storage.KEYS.FAVORITES, []); storage.set(storage.KEYS.FAVORITES, list.filter((item) => !(item.targetId === targetId && item.type === type))); return { favorited: false }; }); }
+function createCheckin(payload) { return mock(() => { const list = storage.get(storage.KEYS.CHECKINS, []); const today = new Date().toISOString().slice(0, 10); const old = list.find((item) => item.siteId === payload.siteId && String(item.time).slice(0, 10) === today); if (old) return { duplicated: true, count: old.count, record: old }; const count = list.filter((item) => item.siteId === payload.siteId).length + 1; const record = Object.assign({ id: 'checkin_' + Date.now(), time: new Date().toISOString(), count }, payload); storage.set(storage.KEYS.CHECKINS, [record].concat(list)); return { duplicated: false, count, record }; }); }
+function reportSiteView(siteId) { return mock(() => { const log = storage.get(storage.KEYS.VIEW_LOG, {}); const today = new Date().toISOString().slice(0, 10); if (log[siteId] === today) return { reported: false }; log[siteId] = today; storage.set(storage.KEYS.VIEW_LOG, log); return { reported: true }; }); }
+function restoreSite() { return mock(() => ({ progress: 100 })); }
 
-module.exports = { USE_MOCK, ok, fail, mock, request, getSites, getSite, getSiteDetail };
+module.exports = { USE_MOCK, ok, fail, mock, request, getSites, getSite, getSiteDetail, getRoutes, getRouteDetail, getMyFavorites, getMyCheckins, addFavorite, removeFavorite, createCheckin, reportSiteView, restoreSite, allSites };
