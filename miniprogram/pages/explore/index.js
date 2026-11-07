@@ -1,5 +1,4 @@
 const api = require('../../utils/api');
-const storage = require('../../utils/storage');
 const location = require('../../utils/location');
 const format = require('../../utils/format');
 
@@ -20,7 +19,7 @@ Page({
     const app = getApp();
     this.markerMap = {};
     this.lastMarkerTap = 0;
-    this.setData({ statusBarHeight: app.globalData.statusBarHeight, locationTipVisible: !storage.get(storage.KEYS.LOCATION_TIP, '') });
+    this.setData({ statusBarHeight: app.globalData.statusBarHeight, locationTipVisible: location.shouldShowLocationTip() });
     this.loadSites();
   },
   onReady() { this.mapCtx = wx.createMapContext('exploreMap', this); },
@@ -50,12 +49,12 @@ Page({
     const site = this.markerMap[markerId];
     if (!site) return;
     const selectedId = this.data.selectedSite && this.data.selectedSite.markerId;
-    const markers = this.data.markers.map((marker) => ({ ...marker, width: marker.id === markerId && selectedId !== markerId ? 34 : 28, height: marker.id === markerId && selectedId !== markerId ? 43 : 36, zIndex: marker.id === markerId && selectedId !== markerId ? 2 : 1 }));
-    this.setData({ markers, selectedSite: selectedId === markerId ? null : { ...site, markerId, distanceText: site.distanceText || '定位后显示距离' } });
+    const markers = this.data.markers.map((marker) => Object.assign({}, marker, { width: marker.id === markerId && selectedId !== markerId ? 34 : 28, height: marker.id === markerId && selectedId !== markerId ? 43 : 36, zIndex: marker.id === markerId && selectedId !== markerId ? 2 : 1 }));
+    this.setData({ markers, selectedSite: selectedId === markerId ? null : Object.assign({}, site, { markerId, distanceText: site.distanceText || '定位后显示距离' }) });
   },
   onMapTap() { if (Date.now() - this.lastMarkerTap > 100) this.closePoi(); },
   closePoi() {
-    const markers = this.data.markers.map((marker) => ({ ...marker, width: 28, height: 36, zIndex: 1 }));
+    const markers = this.data.markers.map((marker) => Object.assign({}, marker, { width: 28, height: 36, zIndex: 1 }));
     this.setData({ selectedSite: null, markers });
   },
   onLocate() {
@@ -65,13 +64,13 @@ Page({
         site.distanceText = format.formatDistance(location.getDistance(position.latitude, position.longitude, site.location.lat, site.location.lng));
       });
       const selected = this.data.selectedSite;
-      if (selected) this.setData({ selectedSite: { ...this.markerMap[selected.markerId], markerId: selected.markerId, distanceText: this.markerMap[selected.markerId].distanceText } });
+      if (selected) this.setData({ selectedSite: Object.assign({}, this.markerMap[selected.markerId], { markerId: selected.markerId, distanceText: this.markerMap[selected.markerId].distanceText }) });
       this.setData({ locationDenied: false });
       if (this.mapCtx) this.mapCtx.moveToLocation();
     }).catch(() => this.setData({ locationDenied: true }));
   },
-  onAllowLocation() { storage.set(storage.KEYS.LOCATION_TIP, 'shown'); this.setData({ locationTipVisible: false }); this.onLocate(); },
-  onBrowseFirst() { storage.set(storage.KEYS.LOCATION_TIP, 'shown'); this.setData({ locationTipVisible: false }); },
+  onAllowLocation() { location.acknowledgeLocationTip(); this.setData({ locationTipVisible: false }); this.onLocate(); },
+  onBrowseFirst() { location.acknowledgeLocationTip(); this.setData({ locationTipVisible: false }); },
   onOpenSetting() { location.openSetting().then(() => this.onLocate()); },
   onLayerTip() { wx.showToast({ title: '路线与足迹图层即将开放', icon: 'none' }); },
   onFullscreen() { this.setData({ mapFullscreen: true }); },

@@ -10,6 +10,7 @@ App({
     this.restoreAuth();
     this.restoreFontScale();
     this.restorePreferences();
+    this.checkSdkVersion();
   },
   initWindowMetrics() {
     const info = wx.getWindowInfo();
@@ -49,7 +50,18 @@ App({
     const nextScale = Number(stepped.toFixed(2));
     this.globalData.fontScale = nextScale;
     storage.set(storage.KEYS.FONT_SCALE, nextScale);
+    this.applyFontScale();
     return nextScale;
+  },
+  applyFontScale() {
+    const pages = getCurrentPages();
+    const current = pages[pages.length - 1];
+    if (current && current.setData) current.setData({ fontScale: this.globalData.fontScale, pageStyle: this.getPageStyle() });
+  },
+  checkSdkVersion() {
+    const version = (wx.getAppBaseInfo && wx.getAppBaseInfo().SDKVersion) || '0.0.0';
+    const compare = (a, b) => { const left = a.split('.').map(Number); const right = b.split('.').map(Number); for (let i = 0; i < 3; i += 1) { if ((left[i] || 0) !== (right[i] || 0)) return (left[i] || 0) - (right[i] || 0); } return 0; };
+    if (compare(version, '3.0.0') < 0) wx.showModal({ title: '建议升级微信', content: '当前微信版本较低，部分功能可能无法正常使用。', showCancel: false });
   },
   getPageStyle() {
     return '--fs:' + this.globalData.fontScale + ';';

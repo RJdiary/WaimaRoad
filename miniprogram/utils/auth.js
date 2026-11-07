@@ -3,7 +3,7 @@ function app() { try { return getApp(); } catch (error) { return null; } }
 function getToken() { return storage.get(storage.KEYS.TOKEN, ''); }
 function getUser() { const user = storage.get(storage.KEYS.USER, null); const instance = app(); if (instance && user) instance.globalData.userInfo = user; return user; }
 function isLoggedIn() { return Boolean(getToken() && getUser()); }
-function login(session) { const token = session.token || ''; const userInfo = session.userInfo || null; storage.set(storage.KEYS.TOKEN, token); storage.set(storage.KEYS.USER, userInfo); const instance = app(); if (instance) Object.assign(instance.globalData, { token, userInfo, isLogin: Boolean(token) }); }
+function login(session) { const token = session.token || ''; const userInfo = session.user || session.userInfo || null; storage.set(storage.KEYS.TOKEN, token); storage.set(storage.KEYS.USER, userInfo); const instance = app(); if (instance) Object.assign(instance.globalData, { token, userInfo, isLogin: Boolean(token) }); }
 function updateUser(patch) { const user = Object.assign({}, getUser() || {}, patch); storage.set(storage.KEYS.USER, user); const instance = app(); if (instance) instance.globalData.userInfo = user; return user; }
 function logout() { const instance = app(); if (instance && instance.logout) instance.logout(); else { storage.remove(storage.KEYS.TOKEN); storage.remove(storage.KEYS.USER); } }
 function buildRedirect() { const pages = getCurrentPages(); const page = pages[pages.length - 1]; const query = page && page.options ? Object.keys(page.options).map((key) => key + '=' + encodeURIComponent(page.options[key])).join('&') : ''; return '/' + (page ? page.route : 'pages/profile/index') + (query ? '?' + query : ''); }

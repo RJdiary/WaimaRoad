@@ -12,6 +12,7 @@ const KEYS = {
   VIEW_LOG: 'byxz_view_log',
   WALK_PROGRESS: 'byxz_walk_progress',
   SUBSCRIBE: 'byxz_subscribe',
+  MESSAGES: 'byxz_messages',
   LOCATION_TIP: 'byxz_locationTip'
 };
 

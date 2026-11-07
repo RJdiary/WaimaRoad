@@ -1,7 +1,10 @@
-const routes = [
-  { id: 'route_01', name: '开埠外交线', theme: 'kaibu', themeName: '开埠外交', cover: '', distance: 1.2, duration: 40, intro: '从海关到洋行，读懂汕头开埠的第一课。', stops: ['site_001', 'site_002', 'site_005', 'site_006', 'site_003'], polyline: [{ latitude: 23.35399, longitude: 116.67865 }, { latitude: 23.35362, longitude: 116.67966 }, { latitude: 23.35405, longitude: 116.68062 }, { latitude: 23.35442, longitude: 116.68128 }, { latitude: 23.35470, longitude: 116.68195 }], order: 1 },
-  { id: 'route_02', name: '侨乡商贸线', theme: 'qiaoxiang', themeName: '侨乡商贸', cover: '', distance: 1.5, duration: 50, intro: '从侨批与酒楼，读懂一纸乡愁的往来。', stops: ['site_005', 'site_006', 'site_004', 'site_002', 'site_009'], polyline: [{ latitude: 23.3535, longitude: 116.6804 }, { latitude: 23.354, longitude: 116.6807 }, { latitude: 23.3542, longitude: 116.6798 }, { latitude: 23.3531, longitude: 116.6792 }, { latitude: 23.3548, longitude: 116.6819 }], order: 2 },
-  { id: 'route_03', name: '文教宗教线', theme: 'wenjiao', themeName: '文教宗教', cover: '', distance: 1.0, duration: 35, intro: '从香火到书声，走进老城的日常信仰。', stops: ['site_007', 'site_008', 'site_009', 'site_004'], polyline: [{ latitude: 23.3552, longitude: 116.6815 }, { latitude: 23.3514, longitude: 116.6801 }, { latitude: 23.3548, longitude: 116.6819 }, { latitude: 23.3542, longitude: 116.6798 }], order: 3 },
-  { id: 'route_04', name: '红色革命线', theme: 'hongse', themeName: '红色革命', cover: '', distance: 1.8, duration: 60, intro: '从会馆到史迹，走一遍东征与抗战的记忆。', stops: ['site_010', 'site_011', 'site_012', 'site_009'], polyline: [{ latitude: 23.3556, longitude: 116.6793 }, { latitude: 23.3512, longitude: 116.6788 }, { latitude: 23.3562, longitude: 116.6802 }, { latitude: 23.3548, longitude: 116.6819 }], order: 4 }
+const { sites } = require('./sites');
+const rows = [
+  ['route_01', '开埠外交线', 'kaibu', '开埠外交', 1.2, 40, '从海关到洋行，读懂汕头开埠的第一课。', ['site_001', 'site_005', 'site_006', 'site_003'], 1],
+  ['route_02', '侨乡商贸线', 'qiaoxiang', '侨乡商贸', 1.5, 50, '从侨批与酒楼，读懂一纸乡愁的往来。', ['site_005', 'site_006', 'site_004', 'site_001', 'site_009'], 2],
+  ['route_03', '文教宗教线', 'wenjiao', '文教宗教', 1.0, 35, '从香火到书声，走进老城的日常信仰。', ['site_007', 'site_008', 'site_009', 'site_004'], 3],
+  ['route_04', '红色革命线', 'hongse', '红色革命', 1.8, 60, '从会馆到史迹，走一遍东征与抗战的记忆。', ['site_010', 'site_011', 'site_012', 'site_009'], 4]
 ];
+const findSite = (id) => sites.find((site) => site.id === id);
+const routes = rows.map((row) => ({ id: row[0], name: row[1], theme: row[2], themeName: row[3], distance: row[4], duration: row[5], intro: row[6], stops: row[7], order: row[8], cover: findSite(row[7][0]).cover, polyline: row[7].map((id) => { const point = findSite(id).location; return { latitude: point.lat, longitude: point.lng }; }) }));
 module.exports = { routes };
