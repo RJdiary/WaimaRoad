@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "隐私设置" }
+{"navigationStyle":"custom","navigationBarTitleText":"隐私设置","usingComponents":{"nav-bar":"../../../../components/nav-bar/index"}}

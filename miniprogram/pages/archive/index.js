@@ -1,9 +1,9 @@
 const api = require('../../utils/api');
 const filters = [{ key: 'all', name: '全部' }, { key: 'kaibu', name: '开埠外交' }, { key: 'qiaoxiang', name: '侨乡商贸' }, { key: 'wenjiao', name: '文教宗教' }, { key: 'hongse', name: '红色革命' }];
 Page({
-  data: { pageStyle: '', statusBarHeight: 0, filters, category: 'all', list: [], page: 1, hasMore: true, loading: true, error: false },
-  onLoad() { this.requestSeq = 0; this.setData({ statusBarHeight: getApp().globalData.statusBarHeight }); this.loadList(true); },
-  onShow() { this.setData({ pageStyle: getApp().getPageStyle(), statusBarHeight: getApp().globalData.statusBarHeight }); const tabBar = typeof this.getTabBar === 'function' && this.getTabBar(); if (tabBar) tabBar.setData({ selected: 1 }); },
+  data: { filters, category: 'all', list: [], page: 1, hasMore: true, loading: true, error: false },
+  onLoad() { this.requestSeq = 0; this.loadList(true); },
+  onShow() { const tabBar = typeof this.getTabBar === 'function' && this.getTabBar(); if (tabBar) tabBar.setData({ selected: 1 }); },
   loadList(reset) {
     const page = reset ? 1 : this.data.page + 1;
     const requestSeq = ++this.requestSeq;

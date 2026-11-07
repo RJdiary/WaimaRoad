@@ -1,1 +1,1 @@
-Page({});
+const auth=require('../../../../utils/auth'),api=require('../../../../utils/api');Page({data:{list:[],loading:true,fontScale:1},onLoad(o){if(!auth.requireLogin())return;this.setData({fontScale:getApp().globalData.fontScale});api.getMyCheckins().then(r=>this.setData({list:r.data,loading:false}));},back(){wx.navigateBack();},explore(){wx.switchTab({url:'/pages/explore/index'});},go(e){wx.navigateTo({url:'/subpackages/detail/pages/site-detail/index?siteId='+e.currentTarget.dataset.id});}});

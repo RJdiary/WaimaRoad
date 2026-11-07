@@ -1,7 +1,1 @@
-Page({
-  data: { pageStyle: '' },
-  onShow() {
-    this.setData({ pageStyle: getApp().getPageStyle() });
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().setData({ selected: 3 });
-  }
-});
+const api=require('../../utils/api');const auth=require('../../utils/auth');Page({data:{user:null,stats:{checkins:0,favorites:0,footprints:0},fontScale:1},onShow(){this.setData({fontScale:getApp().globalData.fontScale,user:auth.getUser()});if(this.getTabBar())this.getTabBar().setData({selected:3});this.load();},async load(){if(!auth.isLoggedIn())return;let r=await Promise.all([api.getMyCheckins(),api.getMyFavorites()]);let end={checkins:r[0].data.length,favorites:r[1].data.length,footprints:new Set(r[0].data.map(x=>x.siteId)).size},t=Date.now(),go=()=>{let p=Math.min(1,(Date.now()-t)/600),s={};Object.keys(end).forEach(k=>s[k]=Math.round(end[k]*p));this.setData({stats:s});if(p<1)setTimeout(go,16)};go();},go(e){let url=e.currentTarget.dataset.url;if(!auth.requireLogin({redirect:url}))return;wx.navigateTo({url});},edit(){let url='/subpackages/user/pages/profile-edit/index';if(auth.requireLogin({redirect:url}))wx.navigateTo({url});}});

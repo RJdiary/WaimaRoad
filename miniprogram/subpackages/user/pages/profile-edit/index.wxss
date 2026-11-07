@@ -1,1 +1,1 @@
-
+.page{min-height:100vh;padding:160rpx 48rpx;background:var(--bg);box-sizing:border-box;color:var(--ink)}.avatar{width:128rpx;height:128rpx;margin:auto;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:50%;font-size:22rpx}.avatar image{width:128rpx;height:128rpx}.page input,.page textarea{display:block;width:100%;margin-top:32rpx;padding:24rpx;box-sizing:border-box;background:var(--white);border-radius:16rpx}.save-next{margin-top:48rpx;border-radius:44rpx;background:var(--blue);color:var(--white)}

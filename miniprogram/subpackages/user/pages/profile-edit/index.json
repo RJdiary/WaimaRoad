@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "编辑资料" }
+{"navigationStyle":"custom","navigationBarTitleText":"编辑资料","usingComponents":{"nav-bar":"../../../../components/nav-bar/index"}}

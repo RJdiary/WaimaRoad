@@ -1,1 +1,3 @@
-<view class="page"></view>
+<page-meta page-style="--fs:{{fontScale}}"></page-meta>
+<nav-bar show-back title="字体设置" bind:back="back"/>
+<view class="page"><view class="card preview"><text class="preview-title">潮海关旧址</text><text>汕头开埠的重要见证，现为汕头海关关史陈列馆所在地。</text><text>1921 年 · 钢筋混凝土 · 现存</text></view><view class="segments"><button data-v="1" bindtap="set">标准</button><button data-v="1.15" bindtap="set">大</button><button data-v="1.3" bindtap="set">特大</button></view><slider min="0.9" max="1.3" step="0.05" value="{{fontScale}}" disabled="{{follow}}" bindchange="slide" activeColor="#D98C75"/><text>{{fontScalePercent}}%</text><view>跟随系统字体大小 <switch checked="{{follow}}" bindchange="follow"/></view><text>字体大小会影响所有页面，随时可以改回来。</text><text bindtap="reset">恢复默认</text></view>

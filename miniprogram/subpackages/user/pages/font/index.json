@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "字体设置" }
+{"navigationStyle":"custom","navigationBarTitleText":"字体设置","usingComponents":{"nav-bar":"../../../../components/nav-bar/index"}}

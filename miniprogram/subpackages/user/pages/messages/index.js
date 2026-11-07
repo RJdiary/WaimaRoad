@@ -1,1 +1,1 @@
-Page({});
+const auth=require('../../../../utils/auth'),api=require('../../../../utils/api');Page({data:{list:[],fontScale:1},onLoad(){if(!auth.requireLogin())return;this.setData({fontScale:getApp().globalData.fontScale});api.getMessages().then(r=>this.setData({list:r.data}));},back(){wx.navigateBack();},read(e){let x=e.currentTarget.dataset.x;api.patch('/messages/'+x.id,{read:true}).then(()=>{if(x.link)wx.navigateTo({url:x.link});});}});

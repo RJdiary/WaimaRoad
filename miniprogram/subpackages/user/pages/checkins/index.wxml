@@ -1,1 +1,3 @@
-<view class="page"></view>
+<page-meta page-style="--fs:{{fontScale}}"></page-meta>
+<nav-bar show-back title="我的打卡点" bind:back="back"/>
+<view class="page"><skeleton wx:if="{{loading}}" type="list"/><view wx:for="{{list}}" wx:key="id" class="card" data-id="{{item.siteId}}" bindtap="go"><text class="card-title">{{item.siteName}}</text><text>{{item.time}} · 第 {{item.count}} 次打卡</text></view><empty-state wx:if="{{!loading&&!list.length}}" title="还没有打卡记录" action-text="去探索" bind:action="explore"/></view>

@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "我的打卡点" }
+{"navigationStyle":"custom","navigationBarTitleText":"我的打卡点","usingComponents":{"nav-bar":"../../../../components/nav-bar/index","skeleton":"../../../../components/skeleton/index","empty-state":"../../../../components/empty-state/index"}}

@@ -1,1 +1,1 @@
-
+.search{display:flex;align-items:center;gap:16rpx;padding:60rpx 24rpx 16rpx;background:var(--bg)}.back{width:88rpx;font-size:52rpx}.search input{height:72rpx;flex:1;padding:0 24rpx;border-radius:36rpx;background:var(--white)}.search>text:last-child{color:var(--blue)}.page{min-height:100vh;padding:32rpx 48rpx;background:var(--bg);color:var(--ink)}.page>view>text{display:inline-block;margin:16rpx;padding:12rpx 20rpx;background:var(--apricot);border-radius:32rpx}.card{padding:24rpx;border-bottom:1rpx solid var(--line)}.card text{display:block;color:var(--ink-2)}
