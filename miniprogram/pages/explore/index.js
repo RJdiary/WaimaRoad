@@ -80,7 +80,11 @@ Page({
   onPoiAction(event) { const action = event.currentTarget.dataset.action; const id = this.data.selectedSite.id; const suffix = action === 'detail' ? '' : '&action=' + action; wx.navigateTo({ url: '/subpackages/detail/pages/site-detail/index?siteId=' + id + suffix }); },
   onEntryChange(event) { const index = event.currentTarget.dataset.index; const cards = this.data.entryCards.slice(); cards[index].active = event.detail.current; this.setData({ entryCards: cards }); },
   onEntryTap(event) { const card = this.data.entryCards[event.currentTarget.dataset.index]; if (card.tab) wx.switchTab({ url: '/pages/walk/index' }); else wx.navigateTo({ url: card.url }); },
-  onPageScroll(event) { const top = event.scrollTop; const next = this.data.collapsed ? top >= 60 : top >= 80; if (next !== this.data.collapsed) this.setData({ collapsed: next, searchFixed: next }); },
+  onPageScroll(event) {
+    const top = event.scrollTop;
+    const nextFixed = this.data.searchFixed ? top >= 60 : top >= 80;
+    if (nextFixed !== this.data.searchFixed) this.setData({ searchFixed: nextFixed });
+  },
   onPullDownRefresh() { this.loadSites().finally(() => wx.stopPullDownRefresh()); },
   onShareAppMessage() { return { title: '埠影寻踪｜在汕头老城，边走边读百年', path: '/pages/explore/index' }; }
 });
