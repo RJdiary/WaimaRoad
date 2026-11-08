@@ -24,7 +24,8 @@ Page({
   },
   onReady() { this.mapCtx = wx.createMapContext('exploreMap', this); },
   onShow() {
-    this.setData({ pageStyle: getApp().getPageStyle(), statusBarHeight: getApp().globalData.statusBarHeight });
+    const app = getApp();
+    this.setData({ pageStyle: app.getPageStyle() + 'padding-top:' + app.globalData.statusBarHeight + 'px;', statusBarHeight: app.globalData.statusBarHeight });
     const tabBar = typeof this.getTabBar === 'function' && this.getTabBar();
     if (tabBar) tabBar.setData({ selected: 0 });
   },
