@@ -1,0 +1,1 @@
+Component({ properties: { visible: { type: Boolean, value: false }, poi: { type: Object, value: {} }, favorited: { type: Boolean, value: false } }, methods: { close() { this.triggerEvent('close'); }, detail() { this.triggerEvent('detail'); }, checkin() { this.triggerEvent('checkin'); }, favorite() { this.triggerEvent('favorite'); } } });

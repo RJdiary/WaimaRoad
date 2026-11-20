@@ -1,51 +1,36 @@
 {
-  "pages": [
-    "pages/explore/index",
-    "pages/heritage/index",
-    "pages/street/index",
-    "pages/mine/index",
-    "pages/heritageDetail/index",
-    "pages/aiCompare/index",
-    "pages/streetMap/index",
-    "pages/myFavorites/index",
-    "pages/myCheckins/index",
-    "pages/fontSettings/index",
-    "pages/preferenceSettings/index",
-    "pages/privacySettings/index",
-    "pages/index/index",
-    "pages/example/index"
+  "pages": ["pages/explore/index", "pages/archive/index", "pages/walk/index", "pages/profile/index", "pages/login/index", "pages/register/index"],
+  "subpackages": [
+    { "root": "subpackages/detail", "pages": ["pages/site-detail/index", "pages/topic/index", "pages/ai-restore/index"] },
+    { "root": "subpackages/route", "pages": ["pages/route-detail/index", "pages/walking/index"] },
+    { "root": "subpackages/user", "pages": ["pages/checkins/index", "pages/favorites/index", "pages/preferences/index", "pages/font/index", "pages/privacy/index", "pages/messages/index", "pages/profile-edit/index", "pages/settings/index", "pages/search/index"] }
   ],
+  "usingComponents": {
+    "section-title": "/components/section-title/index"
+  },
   "window": {
-    "backgroundColor": "#FAF3E7",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#8B5A2B",
-    "navigationBarTitleText": "埠藏史库·街绘行图",
-    "navigationBarTextStyle": "white"
+    "backgroundColor": "#FCF7EE",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FCF7EE",
+    "navigationBarTitleText": "埠影寻踪",
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#8B7968",
-    "selectedColor": "#8B5A2B",
-    "backgroundColor": "#FFFFFF",
+    "custom": true,
+    "color": "#333333",
+    "selectedColor": "#333333",
+    "backgroundColor": "#F0E0C7",
     "borderStyle": "white",
     "list": [
-      {
-        "pagePath": "pages/explore/index",
-        "text": "探索"
-      },
-      {
-        "pagePath": "pages/heritage/index",
-        "text": "史料"
-      },
-      {
-        "pagePath": "pages/street/index",
-        "text": "走街"
-      },
-      {
-        "pagePath": "pages/mine/index",
-        "text": "我的"
-      }
+      { "pagePath": "pages/explore/index", "text": "探索", "iconPath": "assets/tabbar/explore.png", "selectedIconPath": "assets/tabbar/explore-active.png" },
+      { "pagePath": "pages/archive/index", "text": "史料", "iconPath": "assets/tabbar/archive.png", "selectedIconPath": "assets/tabbar/archive-active.png" },
+      { "pagePath": "pages/walk/index", "text": "走街", "iconPath": "assets/tabbar/walk.png", "selectedIconPath": "assets/tabbar/walk-active.png" },
+      { "pagePath": "pages/profile/index", "text": "我的", "iconPath": "assets/tabbar/profile.png", "selectedIconPath": "assets/tabbar/profile-active.png" }
     ]
   },
+  "permission": { "scope.userLocation": { "desc": "用于展示附近史迹并验证到点打卡" } },
+  "requiredPrivateInfos": ["getLocation", "chooseLocation", "startLocationUpdate"],
+  "__usePrivacyCheck__": true,
   "sitemapLocation": "sitemap.json",
   "style": "v2",
   "lazyCodeLoading": "requiredComponents"

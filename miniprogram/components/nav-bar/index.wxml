@@ -1,0 +1,7 @@
+<view class="nav {{fixed ? 'nav--fixed' : ''}} {{transparent ? 'nav--transparent' : ''}}" style="padding-top: {{statusBarHeight}}px;">
+  <view class="nav__bar">
+    <view wx:if="{{showBack}}" class="nav__back tap" bindtap="onBack"><text>‹</text></view>
+    <view class="nav__title">{{title}}</view>
+    <view class="nav__right" style="right: {{rightSpace}}px;"><slot name="right"></slot></view>
+  </view>
+</view>

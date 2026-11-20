@@ -1,0 +1,3 @@
+
+
+.map-back,.map-info{position:absolute;top:32rpx;padding:16rpx;background:var(--white);border-radius:32rpx}.map-back{left:32rpx}.map-info{right:32rpx}.route-detail{margin-top:-40rpx;padding:48rpx;background:var(--white);border-radius:40rpx 40rpx 0 0}.route-detail button{margin-top:32rpx;background:var(--blue);color:var(--white);border-radius:44rpx}

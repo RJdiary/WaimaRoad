@@ -1,0 +1,4 @@
+<view class="tab-icon {{active ? 'tab-icon--active' : ''}}">
+  <view class="tab-icon__shape tab-icon__shape--{{name}}"><view class="tab-icon__dot"></view></view>
+  <text class="tab-icon__label t-tab">{{label}}</text>
+</view>

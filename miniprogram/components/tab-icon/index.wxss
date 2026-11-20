@@ -1,0 +1,13 @@
+.tab-icon { display: flex; flex-direction: column; align-items: center; gap: 4rpx; opacity: .9; }
+.tab-icon--active { opacity: 1; }
+.tab-icon__shape { position: relative; width: 52rpx; height: 52rpx; box-sizing: border-box; border: 5rpx solid var(--blue); transition: transform 200ms cubic-bezier(.2, .8, .2, 1); }
+.tab-icon--active .tab-icon__shape { transform: scale(1.06); }
+.tab-icon__shape--explore { border-radius: 50%; background: var(--blue); }
+.tab-icon__shape--explore .tab-icon__dot { position: absolute; width: 12rpx; height: 12rpx; left: 15rpx; top: 15rpx; border: 4rpx solid var(--white); border-radius: 50%; }
+.tab-icon__shape--archive { border-radius: var(--radius-sm); background: var(--teal); box-shadow: -10rpx 8rpx 0 var(--blue), 10rpx 8rpx 0 var(--teal); }
+.tab-icon__shape--walk { transform: rotate(45deg); border-radius: var(--radius-sm); border-color: var(--terracotta); background: var(--coral); }
+.tab-icon--active .tab-icon__shape--walk { transform: rotate(45deg) scale(1.06); }
+.tab-icon__shape--profile { border-radius: var(--radius-sm) var(--radius-sm) 50% 50%; border-color: var(--danger); background: var(--blue); }
+.tab-icon__shape--profile .tab-icon__dot { position: absolute; left: 8rpx; right: 8rpx; top: -16rpx; height: 18rpx; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: var(--danger); }
+.tab-icon__label { color: var(--ink); }
+.tab-icon--active .tab-icon__label { font-weight: 600; }

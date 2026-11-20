@@ -45,9 +45,8 @@
     "disableSWC": true
   },
   "appid": "wx14264fd3b18c547f",
-  "projectname": "quickstart-wx-cloud",
+  "projectname": "WaimaRoad",
   "libVersion": "3.17.0",
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
   "condition": {
     "search": {
       "list": []
@@ -62,13 +61,7 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide"
-        }
-      ]
+      "list": []
     }
   },
   "compileType": "miniprogram",

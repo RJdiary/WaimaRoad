@@ -1,0 +1,8 @@
+.nav { z-index: 50; background: var(--bg); }
+.nav--fixed { position: fixed; top: 0; left: 0; right: 0; }
+.nav--transparent { background: transparent; }
+.nav__bar { position: relative; height: 88rpx; display: flex; align-items: center; }
+.nav__back { width: 64rpx; height: 64rpx; margin-left: 24rpx; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 44rpx; line-height: 1; }
+.nav--transparent .nav__back { background: rgba(0, 0, 0, .35); }
+.nav__title { position: absolute; left: 120rpx; right: 120rpx; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; color: var(--ink); font-size: calc(34rpx * var(--fs)); font-weight: 600; }
+.nav__right { position: absolute; top: 0; height: 88rpx; display: flex; align-items: center; }

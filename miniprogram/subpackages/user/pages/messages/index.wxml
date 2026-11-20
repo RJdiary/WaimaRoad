@@ -1,0 +1,3 @@
+<page-meta page-style="--fs:{{fontScale}}"></page-meta>
+<nav-bar show-back title="消息" bind:back="back"><text slot="right">全部已读</text></nav-bar>
+<view class="page"><view wx:for="{{list}}" wx:key="id" class="card" data-x="{{item}}" bindtap="read"><text class="card-title">{{item.title}}</text><text>{{item.summary}}</text><text>{{item.time}}</text></view><empty-state wx:if="{{!list.length}}" title="暂时没有新消息" action-text="返回"/></view>

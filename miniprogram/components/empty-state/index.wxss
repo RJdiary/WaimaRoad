@@ -1,0 +1,7 @@
+.empty-state { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.empty-state__image, .empty-state__placeholder { width: 360rpx; height: 280rpx; margin-bottom: 24rpx; }
+.empty-state__placeholder { display: flex; align-items: center; justify-content: center; border-radius: var(--radius-card); background: var(--apricot); }
+.empty-state__mark { width: 112rpx; height: 112rpx; border: 8rpx solid var(--terracotta); border-radius: 50% 50% var(--radius-sm) var(--radius-sm); box-sizing: border-box; }
+.empty-state__title { color: var(--ink); font-size: calc(28rpx * var(--fs)); font-weight: 600; }
+.empty-state__desc { max-width: 480rpx; margin-top: 8rpx; color: var(--ink-3); font-size: calc(24rpx * var(--fs)); line-height: 1.5; }
+.empty-state__action { height: 88rpx; margin-top: 24rpx; padding: 0 40rpx; border-radius: var(--radius-pill); background: var(--apricot); color: var(--terracotta-deep); font-size: calc(28rpx * var(--fs)); font-weight: 600; line-height: 88rpx; }

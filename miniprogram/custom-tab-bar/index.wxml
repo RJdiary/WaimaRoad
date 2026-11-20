@@ -1,0 +1,5 @@
+<view class="tabbar">
+  <view wx:for="{{list}}" wx:key="path" class="tabbar__item tap" data-index="{{index}}" data-path="{{item.path}}" bindtap="onTap">
+    <tab-icon name="{{item.name}}" label="{{item.text}}" active="{{selected === index}}" />
+  </view>
+</view>
