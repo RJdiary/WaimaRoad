@@ -1,13 +1,13 @@
 # 埠影寻踪 — Codex 提示词重建工程
 
-汕头小公园开埠区·外马路历史文化街区的探索类微信小程序（原生小程序，本地 Mock 数据）。本仓库当前**不包含实现代码**，只保留需求文档、视觉依据与分阶段重建提示词，用于在 Codex 等 AI 编程工具上按提示词从零重建。
+汕头小公园开埠区·外马路历史文化街区的探索类微信小程序（原生小程序，本地 Mock 数据）。`miniprogram/` 为按 `docs/codex-prompts/` 重建的实现代码，阶段 01—05 已完成、等待验收；`docs/` 保留需求文档、视觉依据与分阶段提示词，用于后续阶段（`07`—`09`）增量开发。
 
 ## 当前状态
 
 | 项 | 状态 |
 | --- | --- |
-| `miniprogram/` | 已清空（需按提示词重建） |
-| `cloudfunctions/` | 已清空（新方案不使用云函数，数据层为本地 Mock + `utils/api.js`） |
+| `miniprogram/` | 已实现（阶段 01—05，20 个页面，数据统一走 `utils/api.js`） |
+| `cloudfunctions/` | 不使用（数据层为本地 Mock + `utils/api.js`） |
 | 需求文档 | `docs/prd.md`（V2.0，已按《埠影寻踪》规格重写） |
 | 视觉依据 | `docs/ui_design.html`（设计 Token + 6 屏原型，已重写） |
 | 数据层 | `docs/cloud-database.md`（Mock / Storage / 云开发迁移，已重写） |
@@ -46,7 +46,17 @@ project.private.config.json   开发者工具本地配置
 - AppID `wx14264fd3b18c547f`（已在 `project.config.json` 中保留）
 - 无 npm 依赖、无构建步骤、不使用云开发
 
-## 重建步骤
+## 运行方式
+
+1. 微信开发者工具「导入项目」，目录选**仓库根目录**（含 `project.config.json`），不要选 `miniprogram/`。
+2. AppID 用 `wx14264fd3b18c547f`，基础库 `3.17.0`；无需 npm 安装、无构建步骤，导入后直接编译。
+3. 编译后 4 个 Tab（探索 / 史料 / 走街 / 我的）可直接访问，共 20 个页面。
+4. Mock 登录：账号 `13900000000`、密码 `123456`；微信登录入口走 `mockWechatUser`。
+5. 全部数据来自 `miniprogram/mock/`，`utils/api.js` 的 `USE_MOCK` 保持 `true`。
+
+## 重建步骤（01—05 已完成）
+
+> `01`—`05` 已完成，本节描述从零重建的流程；`07`—`09` 仍按此方式增量执行。
 
 1. 把 `docs/codex-prompts/AGENTS.md` 复制到仓库根目录，Codex 会自动读取。
 2. 在 Codex 中打开本仓库，先让它读 `docs/codex-prompts/README.md` 与 `docs/codex-prompts/00-baseline.md`。
