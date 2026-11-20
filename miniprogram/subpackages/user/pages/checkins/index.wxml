@@ -1,3 +1,16 @@
 <page-meta page-style="--fs:{{fontScale}}"></page-meta>
-<nav-bar show-back title="我的打卡点" bind:back="back"/>
-<view class="page"><skeleton wx:if="{{loading}}" type="list"/><view wx:for="{{list}}" wx:key="id" class="card" data-id="{{item.siteId}}" bindtap="go"><text class="card-title">{{item.siteName}}</text><text>{{item.time}} · 第 {{item.count}} 次打卡</text></view><empty-state wx:if="{{!loading&&!list.length}}" title="还没有打卡记录" action-text="去探索" bind:action="explore"/></view>
+<nav-bar show-back title="我的打卡点" bind:back="back"><text slot="right" class="view-switch" bindtap="toggleView">{{view === 'list' ? '地图' : '列表'}}</text></nav-bar>
+<view class="page">
+  <skeleton wx:if="{{loading}}" type="list"/>
+  <view wx:elif="{{failed}}" class="status-card"><text>加载失败，请稍后重试</text><button bindtap="load">重新加载</button></view>
+  <block wx:elif="{{list.length}}">
+    <view wx:if="{{view === 'list'}}" class="list-view">
+      <view wx:for="{{list}}" wx:key="id" class="card tap-scale" data-id="{{item.siteId}}" bindtap="go">
+        <text class="card-title">{{item.siteName}}</text>
+        <text>{{item.time}} · 第 {{item.count}} 次打卡</text>
+      </view>
+    </view>
+    <map wx:else class="checkin-map" latitude="{{latitude}}" longitude="{{longitude}}" scale="15" markers="{{markers}}" bindmarkertap="markerTap" show-location="false"></map>
+  </block>
+  <empty-state wx:else title="还没有打卡记录" action-text="去探索" bind:action="explore"/>
+</view>

@@ -5,6 +5,9 @@
     { "root": "subpackages/route", "pages": ["pages/route-detail/index", "pages/walking/index"] },
     { "root": "subpackages/user", "pages": ["pages/checkins/index", "pages/favorites/index", "pages/preferences/index", "pages/font/index", "pages/privacy/index", "pages/messages/index", "pages/profile-edit/index", "pages/settings/index", "pages/search/index"] }
   ],
+  "usingComponents": {
+    "section-title": "/components/section-title/index"
+  },
   "window": {
     "backgroundColor": "#FCF7EE",
     "backgroundTextStyle": "dark",

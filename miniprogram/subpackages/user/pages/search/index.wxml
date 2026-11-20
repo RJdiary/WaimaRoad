@@ -1,1 +1,14 @@
-<page-meta page-style="--fs:{{fontScale}}"></page-meta><view class="search"><text class="back" bindtap="back">‹</text><input value="{{keyword}}" bindinput="input" placeholder="搜建筑、路线、关键词"/><text bindtap="search">搜索</text></view><view class="page"><view wx:if="{{!keyword}}"><view class="history-head"><text class="card-title">搜索历史</text><text bindtap="clearHistory">清空</text></view><text wx:for="{{history}}" wx:key="*this" data-key="{{item}}" bindtap="onKeywordTap">{{item}}</text><text class="card-title">热门搜索</text><text wx:for="{{hotKeywords}}" wx:key="*this" data-key="{{item}}" bindtap="onKeywordTap">{{item}}</text></view><view wx:for="{{list}}" wx:key="id" class="card"><text class="card-title">{{item.name}}</text><text>{{item.summary}}</text></view><empty-state wx:if="{{keyword&&!list.length}}" title="没有找到相关内容"/></view>
+<page-meta page-style="--fs:{{fontScale}}"></page-meta>
+<view class="search"><text class="back" bindtap="back">‹</text><input value="{{keyword}}" bindinput="input" confirm-type="search" bindconfirm="search" placeholder="搜建筑、路线、关键词"/><text class="search-action" bindtap="search">搜索</text></view>
+<view class="page">
+  <view wx:if="{{!keyword}}" class="search-home">
+    <view class="history-head"><text class="card-title">搜索历史</text><text class="clear" bindtap="clearHistory">清空</text></view>
+    <view class="chips"><text wx:for="{{history}}" wx:key="*this" data-key="{{item}}" bindtap="onKeywordTap">{{item}}</text></view>
+    <text class="card-title hot-title">热门搜索</text><view class="chips"><text wx:for="{{hotKeywords}}" wx:key="*this" data-key="{{item}}" bindtap="onKeywordTap">{{item}}</text></view>
+  </view>
+  <view wx:else>
+    <view wx:if="{{loading}}" class="loading">正在搜索…</view>
+    <block wx:for="{{groups}}" wx:key="key" wx:for-item="group"><view class="group"><text class="group-title">{{group.title}}</text><view wx:for="{{group.items}}" wx:key="id" wx:for-item="result" class="result-card tap-scale" data-id="{{result.id}}" data-type="{{result.type}}" bindtap="goResult"><text class="result-title"><text wx:for="{{result.titleParts}}" wx:key="index" class="{{item.hit ? 'highlight' : ''}}">{{item.text}}</text></text><text class="result-summary"><text wx:for="{{result.summaryParts}}" wx:key="index" class="{{item.hit ? 'highlight' : ''}}">{{item.text}}</text></text></view></view></block>
+    <empty-state wx:if="{{searched&&!loading&&!groups.length}}" title="没有找到相关内容"/>
+  </view>
+</view>

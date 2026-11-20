@@ -77,7 +77,10 @@ Page({
   onFullscreen() { this.setData({ mapFullscreen: true }); },
   onExitFullscreen() { this.setData({ mapFullscreen: false }); },
   onSearch() { wx.navigateTo({ url: '/subpackages/user/pages/search/index?from=explore' }); },
-  onPoiAction(event) { const action = event.currentTarget.dataset.action; const id = this.data.selectedSite.id; const suffix = action === 'detail' ? '' : '&action=' + action; wx.navigateTo({ url: '/subpackages/detail/pages/site-detail/index?siteId=' + id + suffix }); },
+  onPoiAction(action) { const site = this.data.selectedSite; if (!site) return; const suffix = action === 'detail' ? '' : '&action=' + action; wx.navigateTo({ url: '/subpackages/detail/pages/site-detail/index?siteId=' + site.id + suffix }); },
+  onPoiDetail() { this.onPoiAction('detail'); },
+  onPoiCheckin() { this.onPoiAction('checkin'); },
+  onPoiFavorite() { this.onPoiAction('favorite'); },
   onEntryChange(event) { const index = event.currentTarget.dataset.index; const cards = this.data.entryCards.slice(); cards[index].active = event.detail.current; this.setData({ entryCards: cards }); },
   onEntryTap(event) { const card = this.data.entryCards[event.currentTarget.dataset.index]; if (card.tab) wx.switchTab({ url: '/pages/walk/index' }); else wx.navigateTo({ url: card.url }); },
   onPageScroll(event) {

@@ -1,1 +1,1 @@
-{ "navigationStyle": "custom", "navigationBarTitleText": "探索", "enablePullDownRefresh": true }
+{ "navigationStyle": "custom", "navigationBarTitleText": "探索", "enablePullDownRefresh": true, "usingComponents": { "map-poi-sheet": "../../components/map-poi-sheet/index" } }

@@ -1,3 +1,11 @@
 <page-meta page-style="--fs:{{fontScale}}"></page-meta>
 <nav-bar show-back title="编辑资料" bind:back="back"><text slot="right" bindtap="save">保存</text></nav-bar>
-<view class="page"><button open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" class="avatar"><image wx:if="{{avatar}}" src="{{avatar}}" mode="aspectFill"/><text wx:else>选择头像</text></button><input type="nickname" value="{{nickname}}" data-k="nickname" bindinput="input" maxlength="12" placeholder="请输入昵称"/><textarea value="{{bio}}" data-k="bio" bindinput="input" maxlength="50" auto-height placeholder="写一句个人简介"/><text>{{bio.length}}/50</text><button class="save-next" bindtap="save">保存并继续</button></view>
+<view class="page">
+  <view class="avatar-area">
+    <button open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" class="avatar tap-scale"><image wx:if="{{avatar}}" src="{{avatar}}" mode="aspectFill"/><text wx:else>选择头像</text></button>
+    <text class="avatar-fallback" bindtap="chooseImage">从相册或相机选择</text>
+  </view>
+  <view class="field"><text class="label">昵称</text><input type="nickname" value="{{nickname}}" bindinput="onNicknameInput" maxlength="12" placeholder="请输入 2—12 个字符"/><text class="hint {{nicknameHint ? 'hint-error' : ''}}">{{nicknameHint || (nickname.length + '/12')}}</text></view>
+  <view class="field"><text class="label">个人简介</text><textarea value="{{bio}}" bindinput="onBioInput" maxlength="50" auto-height placeholder="写一句个人简介"/><text class="hint {{bioHint ? 'hint-error' : ''}}">{{bioHint || (bio.length + '/50')}}</text></view>
+  <button class="save-next" bindtap="save">保存并继续</button>
+</view>
